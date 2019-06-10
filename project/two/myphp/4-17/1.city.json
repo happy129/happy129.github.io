@@ -1,0 +1,35 @@
+[{
+        "cityId": 1,
+        "cityName": "湖北",
+        "list": [{
+            "cityId": "101",
+            "cityName": "武汉",
+            "list": ["洪山", "江夏"]
+        }, {
+            "cityId": "102",
+            "cityName": "宜昌",
+            "list": ["西陵", "伍家岗"]
+        }, {
+            "cityId": "103",
+            "cityName": "荆州",
+            "list": ["沙市", "洪湖"]
+        }]
+    },
+    {
+        "cityId": 2,
+        "cityName": "湖南",
+        "list": [{
+            "cityId": "201",
+            "cityName": "长沙",
+            "list": ["岳麓山", "雨花"]
+        }, {
+            "cityId": "202",
+            "cityName": "岳阳",
+            "list": ["岳阳区1", "岳阳区2"]
+        }, {
+            "cityId": "203",
+            "cityName": "娄底",
+            "list": ["娄底区1", "娄底区2"]
+        }]
+    }
+]

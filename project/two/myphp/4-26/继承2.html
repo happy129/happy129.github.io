@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>普通对象的继承(内部原型)</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var person = {
+        username: "人类",
+    }
+    var yellowPerson = {
+
+        say: function() {
+            alert("我就是" + this.username);
+        },
+        // __proto__:继承名
+        __proto__: person //内部原型 增强的字面量
+    }
+    yellowPerson.say();
+</script>
+
+</html>

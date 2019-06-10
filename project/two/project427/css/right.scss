@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #CCC
+}
+
+$width:1200px;
+$margin: 0 auto;
+$fr:right;
+$fl:left;
+.rightFixedBar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 32px;
+    height: 100%;
+    background: #CCC;
+    z-index: 10003;
+    text-align: center;
+    color: #fff;
+    .rightFixedBar-content {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -216px;
+        width: 32px;
+        height: 432px;
+        .rb_btn {
+            display: block;
+            padding: 0 3px;
+            cursor: pointer;
+            .footer_iconBox {
+                position: relative;
+                color: #c40000;
+                padding: 10px 0;
+                border-bottom: 1px solid #f40;
+                font-size: 13px;
+                .iconfont {
+                    font-size: 18px;
+                }
+                p {
+                    margin-left: 5px;
+                    width: 19px;
+                }
+            }
+            .iconBox_tips {
+                display: none;
+                height: 40px;
+                line-height: 40px;
+                width: 108px;
+                background: #494949;
+                right: 80px;
+                top: 0;
+                font-size: 12px;
+                opacity: 0;
+                filter: alphap(opacity=0);
+                .tips_arrow {
+                    position: absolute;
+                    text-align: center;
+                }
+            }
+        }
+        .rb_btn:hover {
+            background-color: #c40000;
+            .footer_iconBox {
+                color: aliceblue;
+            }
+            .iconBox_tips {
+                display: block;
+                opacity: 1;
+                right: 32px;
+                // .e {
+                //     line-height: 30px;
+                //     display: inline-block;
+                //     padding: 10px;
+                //     background: #ccc;
+                // }
+                // .e:before {
+                //     position: absolute;
+                //     z-index: 2;
+                //     right: -6px;
+                //     top: 0;
+                //     content: '';
+                //     width: 0;
+                //     height: 0;
+                //     border-style: solid;
+                //     border-color: transparent transparent transparent #ccc;
+                //     border-width: 25px;
+                // }
+                .tips_arrow {
+                    right: -8px;
+                    top: 12px;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                    font-size: 16px;
+                    color: #494949;
+                    font-family: "\5b8b\4f53";
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>继承5---es6(class extends)</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // es6  继承   class
+    class Person {
+        constructor(username) {
+            this.username = username;
+        }
+        say() {
+            alert(this.username + "你好啊!");
+        }
+    }
+
+    class yellowPerson extends Person {
+        constructor(username, userage) {
+            super();
+            this.username = username;
+            this.userage = userage;
+        }
+    }
+    var yp = new yellowPerson("happy", 18);
+    yp.say();
+</script>
+
+</html>

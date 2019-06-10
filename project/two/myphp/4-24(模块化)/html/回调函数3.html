@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数3</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    fs = require('fs');
+    var A = function(callback) {
+        callback();
+        console.log("AAAAAAAA");
+    }
+    var B = function() {
+        fs.readfile('test.txt', 'utf-8', function(err, data) {
+            console.log(data);
+        });
+        for (var i = 0; i < 10000; i++) {}
+        console.log("BBBBBBBB");
+    }
+    A(B);
+</script>
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品列表</title>
+    <link rel="stylesheet" href="/myphp/Bootstrap/css/bootstrap.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .box {
+            width: 915px;
+            margin: 20px auto;
+        }
+        
+        .head {
+            height: 50px;
+            width: 910px;
+            margin: 0 auto;
+            background-color: #ccc;
+        }
+        
+        .head .h-left {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px;
+            background-color: #e44848;
+            color: #000;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+        
+        #exitBtn {
+            background-color: #fff;
+            color: black;
+        }
+        
+        .head .mycart {
+            float: right;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px;
+            padding: 0 15px;
+            text-align: center;
+        }
+        
+        .head .mycart span {
+            background-color: #e44848;
+            color: #000;
+            float: left;
+        }
+        
+        #cart {
+            float: left;
+            margin-left: 20px;
+            /* cursor: pointer; */
+        }
+        
+        #content .tr {
+            float: left;
+            width: 300px;
+            height: 300px;
+            margin-left: 4px;
+            margin-top: 4px;
+            box-shadow: 2px 2px 2px 2px #cdcdcd;
+        }
+        
+        #content .tr:hover {
+            transform: scale(1.01);
+            border: 1px red solid;
+        }
+        
+        #content .tr img {
+            margin: 10px 50px;
+            height: 200px;
+            width: 200px;
+        }
+        
+        .goods-top {
+            margin-left: 10px;
+            height: 40px;
+        }
+        
+        .goods-top p {
+            float: left;
+            margin: 0;
+            line-height: 40px;
+        }
+        
+        .goods-top p:first-child {
+            margin-right: 70px;
+        }
+        
+        .goods-foot {
+            margin-left: 10px;
+        }
+        
+        .goods-foot p {
+            float: left;
+            height: 34px;
+            margin: 0;
+            line-height: 34px;
+        }
+        
+        .goods-foot p:nth-child(2) {
+            margin: 0 30px;
+        }
+        
+        #page {
+            margin-top: 50px;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/page.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="head">
+            <div class="h-left">
+
+            </div>
+            <div class="mycart">
+
+            </div>
+        </div>
+        <div id="content">
+            <!-- <div class="tr">
+                <img src="./img/1.jpg" alt="">
+                <div class="goods-top">
+                    <p>商品名:商品1</p>
+                    <p>商品编号:80061234</p>
+                </div>
+                <div class="goods-foot">
+                    <p>数量:100</p>
+                    <p>价格:1000.00</p>
+                    <button type="button" class="btn btn-primary" id="buyBtn">立即购买</button>
+                </div>
+            </div> -->
+        </div>
+        <div id="page">
+
+        </div>
+    </div>
+</body>
+<script src="../cookie.js"></script>
+<script src="../ajax.js"></script>
+<script src="../js/page.js"></script>
+<script>
+    var content = document.getElementById("content");
+    var userInfoDiv = document.getElementsByClassName("h-left")[0];
+    var mycartDiv = document.getElementsByClassName("mycart")[0];
+    var buyBtn = document.getElementById("buyBtn");
+    var cart = document.getElementById("cart");
+    // 对用户是否登录进行判断,    没有登录时点击跳转到登录页面   登录后显示登录的信息
+    // 获取登录用户的id
+    var loginId = getCookie("loginId");
+    if (loginId) {
+        var username = getCookie("username");
+        userInfoDiv.innerHTML = `<div><span>${username}</span ><span id="exitBtn" onclick="userExit()">退出登录</span></div>`;
+        // showUser();
+    } else {
+        userInfoDiv.innerHTML = `<div><span onclick="gotoLogin()">点击登录</span></div>`;
+    }
+
+    getData();
+
+    function getData() {
+        $.ajax({
+            type: 'get',
+            url: "../php/getallgoodslistcount.php",
+            dataType: 'json',
+            success: function(obj) {
+                var count = obj["count"];
+                new Page("#page", {
+                    count: count,
+                    shownum: 6,
+                    showpage: 3,
+                    callback: function(pageIndex) {
+
+                        $.ajax({
+                            type: "get",
+                            url: "../php/goodsinfo.php",
+                            // data:"接收页面传递的参数至php页面中";
+                            data: {
+                                // skipnum表示跳过的数据条数
+                                skipnum: (pageIndex - 1) * 6,
+                                // shownum表示页面显示数据条数
+                                shownum: 6
+                            },
+                            dataType: "json",
+                            success: function(list) {
+                                var html = "";
+                                // console.log(typeof(list));
+                                list.forEach(item => {
+                                    var {
+                                        goodsname,
+                                        goodsid,
+                                        goodsprices,
+                                        goodsnum,
+                                        goodsimg
+                                    } = item;
+                                    html += `<div class="tr">
+                                                <img src="../img/${goodsimg}" alt="">
+                                                <div class="goods-top">
+                                                    <p>商品名:${goodsname}</p>
+                                                    <p>商品编号:${goodsid}</p>
+                                                </div>
+                                                <div class="goods-foot">
+                                                    <p>数量:${goodsnum}</p>
+                                                    <p>价格:$${(goodsprices*1).toFixed(2)}</p>
+                                                    <button type="button" class="btn btn-primary" id="buyBtn" onclick="gotoCart('${goodsid}','${goodsname}','${goodsprices}','${goodsimg}')">立即购买</button>
+                                                </div>
+                                            </div>`;
+                                    seeCart();
+                                });
+                                content.innerHTML = html;
+                            }
+                        });
+                    }
+                })
+            }
+        });
+
+    }
+
+    function gotoCart(goodsid, goodsname, goodsprices, goodsimg) {
+        if (loginId) {
+            $.ajax({
+                type: "get",
+                url: "../php/addshoppingcart.php",
+                data: {
+                    userid: loginId,
+                    username: username,
+                    goodsid: goodsid,
+                    goodsname: goodsname,
+                    goodsnum: 1,
+                    goodsprices: goodsprices,
+                    goodsimg: goodsimg,
+                },
+                dataType: "json",
+                success: function(obj) {
+                    if (obj["code"] == 1) {
+                        // 加入购物车时重新加载商品列表中购物车的信息
+                        seeCart();
+                        if (confirm("加入成功,是否进入购物车页面")) {
+                            window.location.href = "mycart.html";
+                        }
+                    } else {
+                        alert(obj["msg"]);
+                    }
+                }
+            });
+        } else {
+            if (confirm("您还未登录,请登录后进行购买.")) {
+                gotoLogin();
+            }
+        }
+    };
+
+    function seeCart() {
+        if (loginId) {
+            $.ajax({
+                type: "get",
+                url: "../php/cartnum.php",
+                data: {
+                    userid: loginId,
+                },
+                dataType: "json",
+                success: function(obj) {
+                    var html = "";
+                    var {
+                        sum,
+                    } = obj;
+                    if (sum >= 1) {
+                        html += `<span class="cartText">${sum}件商品</span>
+                                     <button type="button" class="btn btn-primary" id="cart" onclick="gocart()">查看购物车</button>`;
+                        mycartDiv.innerHTML = html;
+                    } else {
+                        mycartDiv.innerHTML = `<span class="cartText">购物车空空如也</span>`;
+                    }
+                }
+
+            });
+        } else {
+            mycartDiv.innerHTML = `<span class="cartText">购物车空空如也</span>`;
+        }
+    }
+
+    function gocart() {
+        window.location.href = "mycart.html";
+    }
+
+    function userExit() {
+        setCookie("username", "", -7);
+        setCookie("loginId", "", -7);
+        gotoLogin();
+    }
+
+    function gotoLogin() {
+        setCookie("backUrl", window.location.href, 7);
+        window.location.href = "./login.html";
+    }
+</script>
+
+</html>

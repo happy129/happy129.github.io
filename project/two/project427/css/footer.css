@@ -1,0 +1,122 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #CCC;
+}
+
+.v6_footer {
+  font-size: 13px;
+  font-family: "微软雅黑";
+}
+
+.v6_footer .footerMid {
+  height: 343px;
+  background: url(../img/footer_Bg.gif);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.v6_footer .footerMid .footerMid_t {
+  padding-top: 7px;
+  width: 1150px;
+  height: 113px;
+  border-bottom: 2px solid #787878;
+}
+
+.v6_footer .footerMid .footerMid_t .footer_tel {
+  float: left;
+  margin-top: 20px;
+  width: 301px;
+  height: 75px;
+  background: url(../img/tel.png) left top no-repeat;
+}
+
+.v6_footer .footerMid .footerMid_t .footer_serv {
+  margin: 61px 0 0 30px;
+  display: inline-block;
+  color: #080808;
+  float: left;
+}
+
+.v6_footer .footerMid .footerMid_t .qrCodeBox {
+  float: right;
+}
+
+.v6_footer .footerMid .footerMid_t .qrCodeBox p {
+  margin-right: 20px;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.v6_footer .footerMid .footerMid_t .qrCodeBox .fl {
+  float: left;
+}
+
+.v6_footer .footerMid .footerMid_t .qrCodeBox .footer_qrCode {
+  width: 104px;
+  height: 104px;
+  float: left;
+}
+
+.v6_footer .footerMid .footer_center {
+  margin: 0 auto;
+  width: 1150px;
+}
+
+.v6_footer .footerMid .footer_link {
+  margin-top: 40px;
+}
+
+.v6_footer .footerMid .footer_link .firstDl {
+  margin-left: 100px;
+}
+
+.v6_footer .footerMid .footer_link dl {
+  float: left;
+  width: 170px;
+  width: 158px;
+}
+
+.v6_footer .footerMid .footer_link dl dt {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.v6_footer .footerMid .footer_link dl dd {
+  display: block;
+  margin-inline-start: 0px;
+}
+
+.v6_footer .footerMid .footer_link dl dd a {
+  display: inline-block;
+  line-height: 24px;
+  color: #a9a9a9;
+}
+
+.v6_footer .mid_box {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.v6_footer .mid_box p {
+  text-align: center;
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.v6_footer .mid_box .authentication {
+  margin-top: 10px;
+}
+
+.v6_footer .copyright {
+  padding-top: 83px;
+  background: url(../img/baozheng_06.jpg) center top no-repeat;
+  line-height: 24px;
+}

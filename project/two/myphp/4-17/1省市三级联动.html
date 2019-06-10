@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>省市三级联动</title>
+</head>
+<select id="province">
+        <option value="">请选择省份</option>
+    </select>
+<select id="city">
+        <option value="">请选择成城市</option>
+    </select>
+<select name="" id="town">
+        <option value="">请选择区县</option>
+    </select>
+
+<body>
+    <script>
+        var provinceSelect = document.getElementById("province");
+        var citySelect = document.getElementById("city");
+        var townSelect = document.getElementById("town");
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", "/4-17/1.city.json");
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let provinceList = JSON.parse(result);
+                for (var i in provinceList) {
+                    // 操作省份：
+                    // 获取省份列表的数组
+                    var provinceInfo = provinceList[i];
+                    // 获取省份的编号
+                    var provinceId = provinceInfo["cityId"];
+                    // 获取省份的名称
+                    var provinceName = provinceInfo["cityName"];
+                    // 动态创建下拉列表框
+
+                    var option = document.createElement("option");
+                    option.value = provinceId;
+                    option.innerHTML = provinceName;
+                    provinceSelect.appendChild(option);
+
+
+                    provinceSelect.onchange = function() {
+                        townSelect.innerHTML = "";
+                        var provinceId = this.value;
+                        // 根据省份编号获取所在省份的城市集合
+                        var provinceInfo = provinceList.filter(function(item) {
+                            return item.cityId == provinceId;
+                        })[0];
+                        var cityList = provinceInfo["list"];
+                        citySelect.innerHTML = "";
+                        cityList.map(function(item) {
+                            var cityId = item["cityId"];
+                            var cityName = item["cityName"];
+                            var option = document.createElement("option");
+                            option.value = cityId;
+                            option.innerHTML = cityName;
+                            citySelect.appendChild(option);
+
+                            citySelect.onchange = function() {
+                                var cityId = this.value;
+
+                                // 根据城市编号获取市内的城镇集合
+                                var cityInfo = cityList.filter(function(city) {
+                                    return city.cityId == cityId
+                                })[0];
+
+                                var townList = cityInfo["list"];
+                                townSelect.innerHTML = "";
+
+                                // 城镇的下拉框  
+                                townList.map(function(town) {
+                                    var opt = document.createElement("option");
+                                    opt.value = town;
+                                    opt.innerHTML = town;
+                                    townSelect.appendChild(opt);
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

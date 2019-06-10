@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jsonp前端跨域</title>
+</head>
+
+<body>
+
+</body>
+<script src="http://192.168.51.81:8080/js/showeather.js"></script>
+<script>
+    var result = showData();
+    console.log(result);
+    document.write("今天是" + result.date + "日" + "&nbsp;&nbsp;" + "天气" + result.qw + "度" + "&nbsp;&nbsp;" + "风力" + result.fl);
+</script>
+
+</html>

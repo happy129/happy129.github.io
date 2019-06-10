@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1165447_cp67k9tx854.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <title>欢迎注册</title>
+    <!--站点图标：-->
+    <link rel="shortcut icon" href="../img/small-logo.jpg" type="image/x-icon" width="10px">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <div class="mid">
+            <a href="http://www.gjw.com" class="logo">
+                <img src="../img/logo1.jpg" alt="购酒网">
+            </a>
+            <div class="fr login_line">
+                您好，欢迎光临购酒网！
+                <!--<a href="#" class="blue">请登录</a>-->
+                <a href="#"><i class="icon iconfont icon-erweima"></i>联系我们</a>
+                <a class="red" href="#"><i class="icon iconfont icon-kefu">
+                    </i>在线客服</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内容 -->
+    <div class="content">
+        <div class="mid">
+            <div class="register_box" action="http://www.gjw.com">
+                <div class="tabForm">
+                    <ul class="tabForm_btn">
+                        <li class="tab_active">
+                            <a href="#">
+                                <i class="icon iconfont icon-yonghu"></i>用户注册</a>
+                        </li>
+                    </ul>
+                    <div class="register-form">
+                        <div class="form-group" id="form-group">
+                            <label for="username">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名:</label>
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名" onchange="checkUserName()">
+                            <span id="usernameSpan">可含字母/数字/,不能以数字开头,4-10位</span>
+                        </div>
+                        <div class="form-group" id="form-group">
+                            <label for="userpwd">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                            <input type="password" class="form-control" id="userpwd" placeholder="请输入密码" onchange="checkUserPwd()">
+                            <span id="userpwdSpan">可含数字/字母,4-10位</span>
+                        </div>
+                        <div class="form-group" id="form-group">
+                            <label for="repwd">确&nbsp;认&nbsp;密&nbsp;码:</label>
+                            <input type="password" class="form-control" id="repwd" placeholder="请确认密码" onchange="checkRePwd()">
+                            <span id="repwdSpan">请与上面密码保持一致</span>
+                        </div>
+                        <div class="form-group" id="form-group">
+                            <label for="tel">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+                            <input type="number" class="form-control" id="usertel" placeholder="请输入电话" onchange="checkUserTel()">
+                            <span id="usertelSpan">请输出常用电话号码</span>
+                        </div>
+                        <div class="form-group" id="form-group">
+                            <label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+                            <input type="email" class="form-control" id="useremail" placeholder="请输入常用邮箱" onchange="checkUserEmail()">
+                            <span id="useremailSpan">请输出常用邮箱</span>
+                        </div>
+                        <div class="form-group" id="form-group">
+                            <label for="code">验&nbsp;&nbsp;&nbsp;证&nbsp;&nbsp;&nbsp;码:</label>
+                            <input type="text" class="form-control" id="usercode" placeholder="验证码" onchange="checkCode()">
+                            <div id="code"></div>
+                            <span id="usercodeSpan">请输出左侧验证码(不区分大小写)</span>
+                        </div>
+                        <br>
+                        <div id="button">
+                            <button id="btn" class="btn btn-info">点击注册</button>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="fl adBox" href="#" target="_blank">
+                    <img alt="【购酒网】 【购酒网】约惠五一 购酒大惠战 好酒提前送回家" src="../img/login-ad.jpg" width="300" height="356">
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- 底部 -->
+    <div class="footer ">
+        <div class="links ">
+            <a href="# " target="_blank ">关于我们</a> <span>|</span> <a href="# " target="_blank ">联系我们</a> <span>|</span> <a href="# " target="_blank ">
+            友情链接</a> <span>|</span> <a href="# " target="_blank ">隐私声明</a>
+        </div>
+        <div>
+            Copyright©2009-2019 gjw.com, All Rights Reserved 购酒网(上海)供应链管理有限公司 版权所有</div>
+    </div>
+</body>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/string.js"></script>
+<!-- <script src="../js/ajax.js"></script> -->
+<script src="../js/register.js"></script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq的运用(全选与反选)</title>
+</head>
+
+<body>
+    全选:<input class="check-all" type="checkbox"><br />
+    <input type="checkbox" class="check-one" value="1">
+    <input type="checkbox" class="check-one" value="2">
+    <input type="checkbox" class="check-one" value="3"><br />
+    <button id="btn">结算</button>
+</body>
+<script src="../jquery-1.11.3.js"></script>
+<script>
+    $("#btn").click(function() {
+        var len = $(".check-one:checked").length;
+        alert(len);
+    });
+    // 获取单选框的最大值
+    var maxCount = $(".check-one").length;
+    var count = 0;
+    $(".check-all").on("click", function() {
+        var flag = $(this).prop("checked");
+        $(".check-one").prop("checked", flag);
+        count = flag ? maxCount : 0;
+        console.log(count);
+    })
+    $(".check-one").bind("click", function() {
+        if ($(this).prop("checked")) {
+            count++;
+        } else {
+            count--;
+        }
+        if (count == maxCount) {
+            $(".check-all").prop("checked", true);
+        } else {
+            $(".check-all").prop("checked", false);
+        }
+    })
+</script>
+
+</html>

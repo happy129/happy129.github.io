@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <button id="hide">hide</button>
+    <button id="show">show</button>
+</body>
+
+<script>
+    function GetEle(str) {
+        this.eles = document.querySelectorAll(str);
+    }
+
+    GetEle.prototype.html = function(content) {
+        for (var i = 0; i < this.eles.length; i++) {
+            this.eles[i].innerHTML = content;
+        }
+    }
+
+    GetEle.prototype.hide = function() {
+        for (var i = 0; i < this.eles.length; i++) {
+            this.eles[i].style.display = "none"
+        }
+    }
+
+    GetEle.prototype.show = function() {
+        for (var i = 0; i < this.eles.length; i++) {
+            this.eles[i].style.display = "block";
+        }
+    }
+
+    var e = new GetEle("#ul li");
+    e.html("666");
+
+    var hideBtn = document.getElementById("hide");
+    var showBtn = document.getElementById("show");
+
+    hideBtn.onclick = function() {
+        var e = new GetEle("#ul li");
+        e.hide();
+    }
+    showBtn.onclick = function() {
+        var e = new GetEle("#ul li");
+        e.show();
+    }
+</script>
+
+</html>

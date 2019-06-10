@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq的运用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">
+        <h2 class="title">为天地立心,为生民立命</h2>
+        <ul id="ad">
+            <li id="first" class="one">1</li>
+            <li id="middle" class="mid">2</li>
+            <li id="middle" class="mid">3</li>
+            <li id="middle" class="mid">4</li>
+            <li id="last" class="three">5</li>
+            <li></li>
+            <li><span>你好啊</span></li>
+        </ul>
+    </div>
+</body>
+<script src="../jquery-1.11.3.js"></script>
+<script>
+    $("#first").html("壹");
+    $("#middle").html("中");
+    $("#first, #last").css({
+        "color": "red"
+    });
+    $(".head h2").css("color", "blue");
+    $("#ad>li").css("color", "green");
+    $("#first+li").css({
+        "color": "blue",
+        "border": "2px solid red"
+    });
+    // li:not(li:eq(n))   找到除n之外的所有元素---->筛选
+    // $("#ad>li:not(li:eq(3))").html("一波还未平息,一波又来侵袭");
+    // 找到li中内容为4的元素，为其添加样式
+    $("li:contains('4')").css("color", "yellow");
+
+    // 找到li 中内容为空的元素 ===》空元素
+    $("li:empty").html("找到的空元素");
+
+    $("#li:has(span)").css("color", "blue");
+    $("#ad:parent").css("color", "chocolate");
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jsonp前端跨域</title>
+</head>
+
+<body>
+    <input type="text" id="search">
+    <ul id="content"></ul>
+</body>
+<script>
+    var contentDiv = document.getElementById("content");
+    window.baidu = {
+        sug: function(obj) {
+            var list = obj["s"];
+            var html = "";
+            for (var item of list) {
+                html += `<li><a href="https://www.baidu.com/s?wd=${item}">${item}</a></li>`
+            }
+            contentDiv.innerHTML = html;
+        }
+    }
+
+    var searchInput = document.getElementById("search");
+    searchInput.onchange = searchInput.oninput = function() {
+        var key = searchInput.value;
+        var script = document.createElement("script");
+        script.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + key;
+        document.body.appendChild(script)
+    }
+</script>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this的四种指向</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function fn() {
+        // alert(this);
+        console.log(this);
+        // this指向全局的window
+    }
+    fn();
+
+    function fn() {
+        console.log(this);
+        // 指向obj这个对象的
+    }
+
+    var obj = {
+        name: 'happy',
+        age: 18,
+        fun1: fn,
+    }
+
+    obj.fun1();
+
+    var person = {
+        say: function() {
+            alert("6666");
+        }
+    }
+
+    function say() {
+        alert("第三种指向" + this);
+        this.say();
+    }
+    say.call(person);
+</script>
+
+</html>

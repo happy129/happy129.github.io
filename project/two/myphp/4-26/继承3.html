@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>普通对象的继承---Object.create</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var person = {
+        username: '人类',
+    }
+    var fn = function() {
+        alert(this.username + "今年" + this.userage);
+    }
+    var yellowPerson = Object.create(person, {
+        username: {
+            value: "lili",
+        },
+        userage: {
+            value: "18",
+            writable: true, //可改属性
+        },
+        say: {
+            value: fn
+        }
+    });
+    yellowPerson.say = function() {
+        console.log(this);
+        alert(this.username);
+    }
+    yellowPerson.userage = 20;
+    yellowPerson.say();
+
+    var people = {
+        username: "人类",
+        say: function() {
+            alert(this.username);
+        }
+    }
+
+    var yp = Object.create(people, {
+        username: {
+            value: "黄种人",
+            writable: false,
+        }
+    });
+    yp.username = "666";
+    yp.say();
+</script>
+
+</html>

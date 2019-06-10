@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #CCC;
+}
+
+.rightFixedBar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 32px;
+  height: 100%;
+  background: #CCC;
+  z-index: 10003;
+  text-align: center;
+  color: #fff;
+}
+
+.rightFixedBar .rightFixedBar-content {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -216px;
+  width: 32px;
+  height: 432px;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn {
+  display: block;
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn .footer_iconBox {
+  position: relative;
+  color: #c40000;
+  padding: 10px 0;
+  border-bottom: 1px solid #f40;
+  font-size: 13px;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn .footer_iconBox .iconfont {
+  font-size: 18px;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn .footer_iconBox p {
+  margin-left: 5px;
+  width: 19px;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn .iconBox_tips {
+  display: none;
+  height: 40px;
+  line-height: 40px;
+  width: 108px;
+  background: #494949;
+  right: 80px;
+  top: 0;
+  font-size: 12px;
+  opacity: 0;
+  filter: alphap(opacity=0);
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn .iconBox_tips .tips_arrow {
+  position: absolute;
+  text-align: center;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn:hover {
+  background-color: #c40000;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn:hover .footer_iconBox {
+  color: aliceblue;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn:hover .iconBox_tips {
+  display: block;
+  opacity: 1;
+  right: 32px;
+}
+
+.rightFixedBar .rightFixedBar-content .rb_btn:hover .iconBox_tips .tips_arrow {
+  right: -8px;
+  top: 12px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  color: #494949;
+  font-family: "\5b8b\4f53";
+}

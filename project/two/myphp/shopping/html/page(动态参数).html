@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/myphp/Bootstrap/css/bootstrap.css">
+    <title>分页插件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .page {
+            width: 500px;
+            height: 40px;
+            margin: 30px auto;
+        }
+        
+        .page span {
+            float: left;
+            width: 80px;
+            height: 40px;
+            background-color: black;
+            color: aliceblue;
+            text-align: center;
+            line-height: 40px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .page span.disabled {
+            background-color: #cdcdcd;
+        }
+        
+        .page span.default {
+            background-color: black;
+        }
+        
+        .page ul {
+            float: left;
+            height: 40px;
+        }
+        
+        .page ul li {
+            float: left;
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            color: aliceblue;
+            text-align: center;
+            line-height: 40px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .page ul li.selected {
+            background-color: #f40;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page" class="page">
+        <!-- <span class="page-prev">上一页</span>
+        <ul class="page-content">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <span class="page-next">下一页</span> -->
+
+        <!-- <nav aria-label="Page navigation">
+            <ul class="pagination pagination-lg">
+                <li class="disabled">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav> -->
+
+
+    </div>
+
+</body>
+<script>
+    //首先获取数据的总数        100
+    // 设置每页显示的数据条数     5     20页
+    // 连续出现的页码数         5
+    function Page(ele, json) {
+        this.target = document.querySelector(ele);
+        // 默认显示的页码数
+        this.pageIndex = 1;
+        this.option = {
+            count: 100, //总数据条数
+            shownum: 5, //每页显示数据条数
+            showpage: 7, //连续出现页码数
+            prevHtml: "上一页",
+            nextHtml: '下一页',
+            callback: function(pageIndex) {
+                alert(pageIndex);
+            }
+        }
+        Object.assign(this.option, json); //更新数据
+        this.create(); //构建分页的主体结构
+        this.bindData(); //绑定数据
+    }
+
+    Page.prototype.bindData = function() {
+        var that = this;
+        // 通过计算获取页面的总页数
+        var allPage = Math.ceil(this.option["count"] / this.option["shownum"]);
+        var start = 1; //设置起始页码
+        // 判总页码    总页码大于连续出现的页码数--页码数    总页码小于连续出现的页码数--总页码
+        var end = allPage > this.option["showpage"] ? this.option["showpage"] : allPage;
+
+        var middleNum = Math.floor(this.option["showpage"] / 2);
+        // 判断高亮页码与居中页码
+        if (this.pageIndex > middleNum) {
+            start = this.pageIndex - middleNum;
+            end = this.pageIndex + middleNum;
+        }
+        if (this.pageIndex > allPage - middleNum) {
+            start = allPage - this.option["showpage"] + 1;
+            end = allPage;
+        }
+        start = start <= 1 ? 1 : start;
+
+        //总页码大于7 就是显示7  小于等于7 就是总页码数
+        this.content.innerHTML = "";
+        for (var i = start; i <= end; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = i;
+            if (i == this.pageIndex) {
+                li.className = "selected";
+            }
+            li.index = i;
+            li.onclick = function() {
+                that.pageIndex = this.index;
+                that.bindData();
+            }
+            this.content.appendChild(li);
+        }
+
+        // 绑定上下翻页的点击事件
+        this.prevBtn.className = "default";
+        this.prevBtn.onclick = function() {
+            that.pageIndex--;
+            that.bindData();
+        }
+
+        this.nextBtn.className = "default";
+        this.nextBtn.onclick = function() {
+            that.pageIndex++;
+            that.bindData();
+        }
+
+        // 销毁   
+        // 当高亮页码为1时  除去上一页按钮的点击事件
+        if (this.pageIndex == 1) {
+            this.prevBtn.onclick = null;
+            this.prevBtn.className = "disabled";
+        }
+        // 当高亮页码为总页码时  除去下一页按钮的点击事件
+        if (this.pageIndex == allPage) {
+            this.nextBtn.onclick = null;
+            this.nextBtn.className = "disabled";
+        }
+
+        this.option["callback"](this.pageIndex);
+    }
+
+
+
+    Page.prototype.create = function() {
+        this.target.className = "page";
+        // 上一页
+        this.prevBtn = document.createElement("span");
+        this.prevBtn.className = "page-prev";
+        this.prevBtn.innerHTML = this.option["prevHtml"];
+        this.target.appendChild(this.prevBtn);
+
+        // 页码内容
+        this.content = document.createElement("ul");
+        this.content.className = "page-content";
+        this.target.appendChild(this.content);
+
+        // 下一页
+        this.nextBtn = document.createElement("span");
+        this.nextBtn.className = "page-next";
+        this.nextBtn.innerHTML = this.option["nextHtml"];
+        this.target.appendChild(this.nextBtn);
+
+    }
+    new Page("#page", {
+        count: 100,
+        shownum: 5,
+        showpage: 5,
+        nextHtml: "&raquo;",
+        prevHtml: "&laquo;",
+        callback: function(pageIndex) {
+            alert(pageIndex);
+        }
+    });
+</script>
+
+</html>

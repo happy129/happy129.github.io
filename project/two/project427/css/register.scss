@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+$width:1000px;
+$fl:left;
+$fr:right;
+.header {
+    width: 100%;
+    height: 89px;
+    border-bottom: 1px solid #c5c5c5;
+    background: #fff;
+    .mid {
+        margin: 0 auto;
+        width: $width;
+        .logo {
+            float: left;
+            margin-top: 20px;
+        }
+        .login_line {
+            margin-top: 28px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .fr {
+            float: right;
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+            i {
+                display: inline-block;
+                margin-top: -3px;
+                vertical-align: middle;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+            }
+        }
+        a.red {
+            color: #cf0404;
+        }
+    }
+}
+
+.content {
+    overflow: hidden;
+    background-image: url(../img/login_bg.gif);
+    .mid {
+        margin: 20px auto;
+        width: $width;
+        .register_box {
+            overflow: hidden;
+            margin-top: 24px;
+            background: #fff;
+            border: 6px solid rgba(199, 199, 199, 0.7);
+            .tabForm {
+                position: relative;
+                float: left;
+                width: 600px;
+                height: 540px;
+                overflow: hidden;
+                border-right: 1px solid #dcdcdc;
+                .tabForm_btn {
+                    height: 35px;
+                    width: 515px;
+                    margin: 33px auto 0 auto;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid #ddd;
+                    li {
+                        width: 300px;
+                        height: 30px;
+                        margin: 0 auto;
+                        text-align: center;
+                        font-size: 24px;
+                        a {
+                            i {
+                                font-size: 24px;
+                                margin: 0 5px;
+                                color: #0c0c0c;
+                            }
+                        }
+                    }
+                }
+                .register-form {
+                    padding: 10px;
+                    margin-top: 20px;
+                    #form-group {
+                        margin-top: 10px;
+                        label {
+                            margin-left: 30px;
+                            display: inline-block;
+                            width: 70px;
+                        }
+                        input {
+                            display: inline-block;
+                            width: 200px;
+                        }
+                        span {
+                            margin-left: 15px;
+                        }
+                        #usercode {
+                            width: 110px;
+                        }
+                        #code {
+                            display: inline-block;
+                            background-color: #0f4;
+                            width: 80px;
+                            height: 32px;
+                            line-height: 32px;
+                            text-align: center;
+                            margin: -10px 10px;
+                            font-weight: bold;
+                            font-style: italic;
+                            font-size: 20px;
+                            cursor: pointer;
+                        }
+                    }
+                    #button {
+                        width: 120px;
+                        height: 34px;
+                        margin-left: 103px;
+                        button {
+                            display: block;
+                            margin: 0px auto;
+                            width: 120px!important;
+                        }
+                    }
+                }
+            }
+            .adBox {
+                display: inline-block;
+                margin-top: 83px;
+                margin-left: 35px;
+                width: 300px;
+                height: 356px;
+                text-align: center;
+                img {
+                    width: 300px;
+                    height: 356px;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 16px;
+    a {
+        display: inline-block;
+        margin: 0 10px;
+    }
+}

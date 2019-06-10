@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/myphp/Bootstrap/css/bootstrap.css">
+    <style>
+        .box {
+            margin: 50px auto;
+            width: 650px;
+            height: 350px;
+            background-color: #cdcdcd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        #form-group {
+            margin-top: 10px;
+        }
+        
+        .button {
+            width: 82px;
+            height: 34px;
+            margin-left: 125px;
+        }
+        
+        button {
+            display: block;
+            margin: 10px auto;
+        }
+        
+        label {
+            margin-left: 50px;
+            display: inline-block;
+            width: 70px;
+        }
+        
+        span {
+            margin-left: 15px;
+        }
+        
+        #usercode {
+            width: 120px;
+        }
+        
+        #code {
+            display: inline-block;
+            background-color: #0f4;
+            width: 60px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            margin: 0 10px;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form class="form-inline">
+            <div class="form-group" id="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                <span id="usernameSpan">可含字母/数字/,不能以数字开头,4-10位</span>
+            </div>
+            <div class="form-group" id="form-group">
+                <label for="userpwd">密码:</label>
+                <input type="password" class="form-control" id="userpwd" placeholder="请输入密码">
+                <span id="userpwdSpan">可含数字/字母,4-10位</span>
+            </div>
+            <div class="form-group" id="form-group">
+                <label for="tel">电话:</label>
+                <input type="number" class="form-control" id="usertel" placeholder="请输入电话">
+                <span id="usertelSpan">请输出常用电话号码</span>
+            </div>
+            <br>
+            <div class="button">
+                <button id="btn" class="btn btn-default">点击注册</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="../js/register3.js" type="module"></script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 定义一个方法 代理console.log()方法
+    function log(msg) {
+        console.log(msg);
+    }
+    log(666);
+
+    function log() {
+        console.log.apply(console, arguments);
+    };
+    log(1); //1
+    log(1, 2); //1 2
+
+    var altwrite = document.write;
+    altwrite.bind(document)("hello");
+</script>
+
+</html>

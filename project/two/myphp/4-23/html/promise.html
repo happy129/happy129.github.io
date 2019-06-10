@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise异步编程</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // promise异步编程       ajax异步请求
+
+
+    var p = new Promise(function(resolve, reject) {
+        // 在里面进行异步请求   
+        setTimeout(function() {
+            var score = Math.round(Math.random() * 100);
+            if (score >= 60) {
+                resolve(score + "恭喜你及格了");
+            } else {
+                reject(score + "不及格，继续努力哦");
+            }
+        }, 2000)
+    })
+
+    p.then(function(result) {
+        alert(result);
+    }, function(result) {
+        alert(result);
+
+    });
+</script>
+
+</html>

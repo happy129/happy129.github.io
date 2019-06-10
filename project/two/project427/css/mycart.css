@@ -1,0 +1,196 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #f40;
+}
+
+.top {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #cdcdcd;
+}
+
+.top .topContent {
+  width: 1000px;
+  margin: 5px auto;
+  padding-bottom: 5px;
+}
+
+.top .topContent .top-left {
+  width: 300px;
+  height: 40px;
+  float: left;
+}
+
+.top .topContent .top-left p {
+  line-height: 40px;
+  height: 40px;
+  padding: 0 20px;
+  float: left;
+}
+
+.top .topContent .top-left p span {
+  cursor: pointer;
+}
+
+.top .topContent .top-left p:nth-child(1) {
+  border-right: 1px solid #ccc;
+}
+
+.top .topContent .top-right {
+  float: right;
+}
+
+.top .topContent .top-right li {
+  float: left;
+  margin: 0 15px;
+}
+
+.top .topContent .top-right .mycart .cartNum {
+  font-size: 20px;
+  color: red;
+}
+
+.box {
+  margin: 50px auto;
+  width: 1200px;
+  /* background-color: rgb(238, 217, 210); */
+}
+
+.box .head {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #0d3;
+}
+
+.box .head .name {
+  font-weight: bold;
+  color: #f40;
+  font-size: 22px;
+}
+
+.box .table {
+  margin-bottom: 0;
+}
+
+.box .table thead tr {
+  background-color: #cdcdcd;
+  text-align: center;
+}
+
+.box .table tbody tr td {
+  text-align: center;
+  padding: 4px;
+}
+
+.box .table tbody tr #pic {
+  padding: 4px;
+  width: 600px;
+}
+
+.box .table tbody tr #pic img {
+  width: 45px;
+  height: 45px;
+  float: left;
+  margin: 0 5px;
+  /* display: inline-block;
+                            text-align: left; */
+}
+
+.box .table tbody tr #pic p {
+  float: left;
+  height: 44px;
+  line-height: 40px;
+  margin: 0 5px;
+}
+
+.box .table tbody tr .shuliang {
+  width: 180px;
+  text-align: center;
+}
+
+.box .table tbody tr .shuliang input {
+  display: block;
+  width: 50px !important;
+  float: left;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.box .table tbody tr .shuliang .reduce {
+  margin-left: 30px;
+  border-left: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.box .table tbody tr .shuliang .disable {
+  pointer-events: none;
+}
+
+.box .table tbody tr .shuliang .add {
+  border-right: 1px solid #eeeeee;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.box .table tbody tr .shuliang span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  float: left;
+  text-align: center;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.t-foot {
+  background-color: #cecece;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+}
+
+.t-foot #qx {
+  float: left;
+  margin: 0;
+}
+
+.t-foot label input {
+  margin-top: 23px;
+  margin-right: 10px;
+}
+
+.t-foot #delAll {
+  margin-left: 30px;
+}
+
+.t-foot .sum {
+  float: right;
+}
+
+.t-foot .sum p {
+  margin: 0 20px;
+  float: left;
+  font-size: 18px;
+}
+
+.t-foot .sum p #zong {
+  color: #f40;
+  font-weight: bold;
+}
+
+.t-foot .sum p #pricesTotal {
+  color: #f40;
+  font-weight: bold;
+  font-style: italic;
+}

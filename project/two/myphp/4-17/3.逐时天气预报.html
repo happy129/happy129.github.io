@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>城市天气预报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        ul {
+            width: 80%;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        
+        ul li {
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            margin: 0 10px 5px 0;
+            background-color: #cfcfcf;
+            /* border-radius: 15px; */
+            color: #000;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        ul li:hover {
+            background-color: rgb(86, 95, 230);
+        }
+        
+        #box {
+            width: 80%;
+            margin: 10px auto;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            height: 200px;
+        }
+        
+        #weatherhours {
+            height: 180px;
+            width: 180%;
+            /* margin: 10px auto; */
+        }
+        
+        #weatherhours .tr {
+            height: 180px;
+            width: 70px;
+            float: left;
+            margin-left: 5px;
+        }
+        
+        #weatherhours .tr li {
+            width: 70px;
+            height: 30px;
+            margin: 0;
+        }
+        
+        img {
+            width: 70px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="province"></ul>
+    <hr>
+    <ul id="city"></ul>
+    <hr>
+    <ul id="town"></ul>
+    <hr>
+    <div id="box">
+        <div id="weatherhours">
+            <!-- <ul class="tr">
+                <li class="first">时间</li>
+                <li>天气图标</li>
+                <li>天气</li>
+                <li>气温</li>
+            </ul> -->
+        </div>
+    </div>
+</body>
+<script>
+    var provinceUl = document.getElementById("province");
+    var cityUl = document.getElementById("city");
+    var townUl = document.getElementById("town");
+    var weatherhoursDiv = document.getElementById("weatherhours");
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", "http://api.yytianqi.com/citylist/id/2", true);
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let result = xhr.responseText;
+            let china = JSON.parse(result);
+
+            var provinceList = china["list"]; //获取省份列表;
+            for (var i in provinceList) { //遍历省份;
+                var provinceInfo = provinceList[i]; //获取城市集合
+                var provinceName = provinceInfo["name"]; //获取城市名称
+                var provinceId = provinceList["city_id"]; //获取城市编号
+                var li = document.createElement("li");
+                li.innerHTML = provinceName;
+                li.dataId = provinceId;
+                li.dataList = provinceInfo["list"];
+
+                // 绑定数据:
+                provinceUl.appendChild(li);
+
+                li.onclick = function() {
+                    li.style.backgroundColor = "#ccc";
+                    this.style.backgroundColor = "red ";
+                    // this.style = "background-color:red";
+                    townUl.style.display = "none";
+                    // alert(this.dataList);
+                    cityList = this.dataList; //点击了省份的集合
+
+                    var html = "";
+
+
+                    cityList.forEach(function(city) {
+                        // this.style = "background-color:red"
+                        var cityId = city["city_id"];
+                        var cityName = city["name"];
+                        var townList = city["list"];
+                        // 利用长字符串来创建DOM元素
+                        html += `<li onclick="showTown('${cityId}')">${cityName}</li>`;
+                        li.onclick = function() {
+                            // li.style.backgroundColor = "#ccc";
+                            this.style.backgroundColor = "red ";
+                        }
+                    });
+                    cityUl.innerHTML = html;
+                }
+            }
+        }
+    }
+
+    function showTown(cityId) {
+        var cityInfo = cityList.filter(function(item) {
+            return item["city_id"] == cityId;
+        })[0];
+        var townList = cityInfo["list"];
+        if (townList) {
+            var html = "";
+            townList.forEach(function(town) {
+                var townId = town["city_id"];
+                var townName = town["name"];
+                html += `<li onclick="showHourWeather('${townId}')">${townName}</li>`;
+            });
+            townUl.innerHTML = html;
+            townUl.style.display = "block";
+        } else {
+            // alert("直辖市,只有两个层级,点击之后无反应");
+            showHourWeather(cityId);
+        }
+    }
+
+    //封装一个显示城市一天实时天气信息的函数:
+
+    function showHourWeather(cityId) {
+        getHourWeather(cityId);
+    }
+
+    // 调用API
+    function getHourWeather(cityId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", `http://api.yytianqi.com/weatherhours?city=${cityId}&key=i960mru3a50n4guo`, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let item = JSON.parse(result);
+                let data = item["data"];
+                let list = data["list"];
+                // console.log(Array.isArray(list));
+
+                var html = "";
+                for (var i of list) {
+                    var {
+                        sj,
+                        numtq,
+                        tq,
+                        qw,
+                        sd,
+                    } = i;
+                    // console.log(sj);
+                    // 解析时间  2019-04-18 11:00:00 取出后面的小时与分钟数
+                    var time = sj.substring(11, 16);
+                    // console.log(time);
+                    html += `<ul class="tr">
+                        <li>${time}</li>
+                        <li><img src="7040/${numtq}_0.png"></li>
+                        <li>${tq}</li>
+                        <li>${qw}</li>
+                        <li>${sd}</li>
+                    </ul>`;
+                }
+                weatherhoursDiv.innerHTML = html;
+
+            }
+        }
+    }
+</script>
+
+</html>

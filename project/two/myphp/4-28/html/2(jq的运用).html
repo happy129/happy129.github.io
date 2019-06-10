@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq的运用</title>
+    <style>
+        #first,
+        #last {
+            color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ad">
+        <li id="first" class="frist" data-type="user_1">1</li>
+        <li class="middle" data-type="user_2">2</li>
+        <li class="middle" data-type="goods_1">3</li>
+        <li class="middle" data-type="goods_2">4</li>
+        <li id="last" class="last">5
+            <span>5.5</span>
+        </li>
+        <ul>
+            <li>1.1</li>
+            <li></li>
+        </ul>
+    </ul>
+</body>
+<script src="../jquery-1.11.3.js"></script>
+<script>
+    // 找到li中含有id的标签
+    // $("li[id]").html("我们都有编号");
+
+    // 找到li中含有id与class的标签
+    // $("li[id][class]").html("我们都有编号和class");
+
+    // 找到li中含有id 且class为first的标签
+    // $("li[id][class=frist]").html("我们都有编号和class");
+
+    // 找到li中class为middle 的
+    // $("li[class=middle]").html("我们都有middle calss").css({
+    //     "color": "red"
+    // })
+
+    // 找到li中data-type 以user_开头的
+    // $("li[data-type^=user_]").html("我们都是用户");
+
+    // 找到li中data-type 以_1结束的
+    // $("li[data-type$=_1]").html("我们都是第一个");
+
+    // 找到li中data-type 中含_的
+    // $("li[data-type*=_]").html("我们是有_的");
+
+    // 找到li中data-type 中不含user_的
+    $("li[data-type!=user_2][data-type]").html("6666");
+</script>
+
+</html>

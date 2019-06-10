@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this的指向 ---数组</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function func() {
+        console.log(this);
+    }
+
+    //③ 函数作为数组的一个元素，通过数组下标调用的：this指向这个数组
+    var arr = [func, 1, 2, 3];
+    arr[0](); // this--->arr
+</script>
+
+</html>

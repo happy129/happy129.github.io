@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>城市天气预报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        ul {
+            width: 80%;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        
+        ul li {
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            margin: 0 10px 5px 0;
+            background-color: #cfcfcf;
+            /* border-radius: 15px; */
+            color: #000;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        ul li:hover {
+            background-color: rgb(86, 95, 230);
+        }
+        
+        #box {
+            width: 80%;
+            margin: 10px auto;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            height: 250px;
+        }
+        
+        #forecast7d {
+            height: 230px;
+            width: 115%;
+            /* margin: 10px auto; */
+        }
+        
+        #forecast7d .tr {
+            height: 230px;
+            width: 150px;
+            float: left;
+            margin-left: 5px;
+        }
+        
+        #forecast7d .tr li {
+            width: 75px;
+            height: 30px;
+            float: left;
+            margin: 0;
+        }
+        
+        #forecast7d .tr li.first {
+            width: 150px;
+        }
+        
+        img {
+            width: 70px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="province"></ul>
+    <hr>
+    <ul id="city"></ul>
+    <hr>
+    <ul id="town"></ul>
+    <hr>
+    <div id="box">
+        <div id="forecast7d">
+            <!-- <ul class="tr">
+                <li class="first">时间</li>
+                <li>白天图标</li>
+                <li>晚上图标</li>
+                <li>白</li>
+                <li>晚</li>
+                <li>天气1</li>
+                <li>天气2</li>
+                <li>气温1</li>
+                <li>气温2</li>
+                <li>风力1</li>
+                <li>风力2</li>
+                <li>风向1</li>
+                <li>风向2</li>
+            </ul> -->
+        </div>
+    </div>
+</body>
+<script>
+    var provinceUl = document.getElementById("province");
+    var cityUl = document.getElementById("city");
+    var townUl = document.getElementById("town");
+    var forecast7dDiv = document.getElementById("forecast7d");
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", "http://api.yytianqi.com/citylist/id/2", true);
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let result = xhr.responseText;
+            let china = JSON.parse(result);
+
+            var provinceList = china["list"]; //获取省份列表;
+            for (var i in provinceList) { //遍历省份;
+                var provinceInfo = provinceList[i]; //获取城市集合
+                var provinceName = provinceInfo["name"]; //获取城市名称
+                var provinceId = provinceList["city_id"]; //获取城市编号
+                var li = document.createElement("li");
+                li.innerHTML = provinceName;
+                li.dataId = provinceId;
+                li.dataList = provinceInfo["list"];
+
+                // 绑定数据:
+                provinceUl.appendChild(li);
+
+                li.onclick = function() {
+                    li.style.backgroundColor = "#ccc";
+                    this.style.backgroundColor = "red ";
+                    // this.style = "background-color:red";
+                    townUl.style.display = "none";
+                    // alert(this.dataList);
+                    cityList = this.dataList; //点击了省份的集合
+
+                    var html = "";
+                    // for (var i in cityList) {
+                    //     var cityId = city["city_id"];
+                    //     var cityName = city["city_name"];
+                    //     var townList = city["list"];
+                    // }
+                    // cityList.forEach(function(city) {
+
+                    //     var cityId = city["city_id"];
+                    //     var cityName = city["name"];
+                    //     var townList = city["list"];
+                    //     // 动态创建DOM元素
+                    //     var li = document.createElement("li");
+                    //     li.innerHTML = cityName;
+                    //     li.dataId = cityId;
+                    //     cityUl.appendChild(li);
+                    // });
+
+
+                    cityList.forEach(function(city) {
+                        // this.style = "background-color:red"
+                        var cityId = city["city_id"];
+                        var cityName = city["name"];
+                        var townList = city["list"];
+                        // 利用长字符串来创建DOM元素
+                        html += `<li onclick="showTown('${cityId}')">${cityName}</li>`;
+                    });
+                    cityUl.innerHTML = html;
+                }
+            }
+        }
+    }
+
+    function showTown(cityId) {
+        var cityInfo = cityList.filter(function(item) {
+            return item["city_id"] == cityId;
+        })[0];
+        var townList = cityInfo["list"];
+        if (townList) {
+            var html = "";
+            townList.forEach(function(town) {
+                var townId = town["city_id"];
+                var townName = town["name"];
+                html += `<li onclick="showWeather('${townId}')">${townName}</li>`;
+            });
+            townUl.innerHTML = html;
+            townUl.style.display = "block";
+        } else {
+            // alert("直辖市,只有两个层级,点击之后无反应");
+            showWeather(cityId);
+        }
+    }
+
+    //封装一个显示城市一周天气信息的函数:
+
+    function showWeather(cityId) {
+        getForecast7d(cityId);
+    }
+
+    // 调用API
+    function getForecast7d(cityId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", `http://api.yytianqi.com/forecast7d?city=${cityId}&key=i960mru3a50n4guo`, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let item = JSON.parse(result);
+                let data = item["data"];
+                let list = data["list"];
+
+
+                var html = "";
+                for (var i of list) {
+                    var {
+                        tq1,
+                        tq2,
+                        numtq1,
+                        numtq2,
+                        qw1,
+                        qw2,
+                        fl1,
+                        fl2,
+                        fx1,
+                        fx2,
+                        date
+                    } = i;
+                    html += `<ul class="tr">
+                        <li class="first">${date}</li>
+                        <li><img src="7040/${numtq1}_0.png"></li>
+                        <li><img src="7040/${numtq2}_1.png"></li>
+                        <li>白</li>
+                        <li>晚</li>
+                        <li>${tq1}</li>
+                        <li>${tq2}</li>
+                        <li>${qw1}</li>
+                        <li>${qw2}</li>
+                        <li>${fl1}</li>
+                        <li>${fl2}</li>
+                        <li>${fx1}</li>
+                        <li>${fx2}</li>
+                    </ul>`;
+                }
+                forecast7dDiv.innerHTML = html;
+
+            }
+        }
+    }
+</script>
+
+</html>

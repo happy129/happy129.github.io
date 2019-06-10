@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var o = {
+        user: "追梦子",
+        fn: function() {
+            console.log(this);
+            console.log(this.user); //追梦子
+        }
+    }
+    window.o.fn();
+
+
+
+    var o = {
+        a: 10,
+        b: {
+            a: 12,
+            fn: function() {
+                console.log(this);
+                console.log(this.a); //12
+            }
+        }
+    }
+    o.b.fn();
+
+
+    var o = {
+        a: 10,
+        b: {
+            // a:12,
+            fn: function() {
+                console.log(this);
+                console.log(this.a); //undefined
+            }
+        }
+    }
+    o.b.fn();
+
+    var o = {
+        a: 10,
+        b: {
+            a: 12,
+            fn: function() {
+                console.log(this.a); //undefined
+                console.log(this); //window
+            }
+        }
+    }
+    var j = o.b.fn;
+    j();
+</script>
+
+</html>

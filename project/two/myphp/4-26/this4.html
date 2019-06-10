@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this的指向 ---window</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function func() {
+        console.log(this);
+    }
+
+
+    //④ 函数作为window内置函数的回调函数调用：this指向window
+    setTimeout(func, 1000); // this--->window
+    //setInterval(func,1000);
+</script>
+
+</html>

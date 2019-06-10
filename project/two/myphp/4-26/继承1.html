@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>继承1---原型继承(构造函数)</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    Object.prototype.username = "对象";
+    var person = {
+        username: "人类",
+        eat: function() {
+            alert("吃货,快来吧！")
+            return this;
+        }
+    }
+
+    function YellowPerson() {
+        this.say = function() {
+            alert("我是" + "this.username")
+        }
+    }
+
+    function WhitePerson() {
+        this.say = function() {
+            alert("我是" + this.username);
+            return this;
+        }
+    }
+
+    // WhitePerson.prototype.eat = function() {
+    //     alert("吃货,快来吧");
+    //     return this;
+    // };
+    // YellowPerson.prototype = person;
+    WhitePerson.prototype = person;
+    // var yp = new YellowPerson();
+    var wp = new WhitePerson();
+
+
+    // 链式结构
+    wp.say().eat();
+
+    // wp.say();
+    // wp.eat();
+</script>
+
+</html>

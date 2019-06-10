@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        #header {
+            width: 605px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        
+        #table {
+            width: 605px;
+            margin: 0px auto;
+        }
+        
+        .foot {
+            width: 300px;
+            margin: 10px auto;
+        }
+        
+        #table tr td {
+            text-align: center;
+            height: 35px;
+            line-height: 35px;
+        }
+        /* ul {
+            width: 550px;
+            height: 30px;
+        }
+        
+        ul li {
+            float: left;
+            width: 105px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #ccc;
+            color: #000;
+        } */
+        /* .del {
+        } */
+        
+        .delbtn {
+            display: block;
+            height: 30px;
+            /* line-height: 30px; */
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        
+        .search {
+            width: 300px;
+            display: inline-block;
+        }
+        
+        #search {
+            margin-top: 0px;
+            margin-left: 10px;
+            margin-right: 90px;
+        }
+        
+        #select {
+            width: 140px;
+            display: inline-block;
+        }
+        
+        #num-asc {
+            margin-left: 0;
+        }
+        
+        button {
+            margin: 15px 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <input type="search" class="form-control search" id="keywords" placeholder="请输入关键字">
+        <button type="button" class="btn btn-info " id="search">搜索</button>
+        <select class="form-control " id="select" name="select">
+            <option value="5">显示5条数据</option>
+            <option value="8">显示8条数据</option>
+            <option value="10">显示10条数据</option>
+        </select>
+        <button type="button" class="btn btn-primary" id="num-asc" value="asc" name="id">编号升序</button>
+        <button type="button" class="btn btn-success" id="num-desc" value="desc" name="id">编号降序</button>
+        <button type="button" class="btn btn-warning" id="name-asc" value="asc" name="username">用户名升序</button>
+        <button type="button" class="btn btn-success" id="name-desc" value="desc" name="username">用户名降序</button>
+    </div>
+    <div id="table">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>密码</td>
+                    <td>手机号</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!-- <tr class="tr">
+                    <td>1</td>
+                    <td>123</td>
+                    <td>1234</td>
+                    <td>17771427257</td>
+                    <td>操作</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    <div class="foot">
+        <img src="./img/1.jpg" alt="">
+        <button type="button" class="btn btn-primary" id="prev">上一页</button>
+        <button type="button" class="btn btn-primary" id="next">下一页</button>
+    </div>
+
+</body>
+<script>
+    var tbody = document.getElementById("tbody");
+
+    // 获取搜索框：
+    var keywordsInput = document.getElementById("keywords");
+    // 获取搜索按钮：
+    var searchBtn = document.getElementById("search");
+
+    var idList = document.getElementsByName("id");
+    var nameList = document.getElementsByName("username");
+    var selectList = document.getElementsByName("select")[0];
+
+    // 关键字：
+    var key = "";
+    var id = "";
+    var username = "";
+    var select = 5;
+
+    // 遍历id按钮
+    for (var i = 0; i < idList.length; i++) {
+        idList[i].onclick = function() {
+            id = this.value;
+            console.log(id);
+            getData(key, username, id, select);
+        }
+    }
+
+    // 遍历name按钮
+    for (var i = 0; i < nameList.length; i++) {
+        nameList[i].onclick = function() {
+            username = this.value;
+            console.log(username);
+            getData(key, username, id, select);
+        }
+    }
+
+    // 选择显示数据条数：
+    selectList.onchange = function() {
+        select = this.value;
+        console.log(select);
+        getData(key, username, id, select);
+    }
+
+    getData(key, username, id, select);
+
+    function delLi(key, td) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", "del.php?id= " + key, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let obj = JSON.parse(result);
+                if (obj["code==1"]) {
+                    td.parentNode.remove();
+                    location.reload();
+                } else {
+                    alert(obj["msg"]);
+                }
+            }
+        }
+    }
+
+    function getData(key, username, id, select) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", `query.php?key=${key}&username=${username}&id=${id}&select=${select}`, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let obj = JSON.parse(result);
+                var html = "";
+                obj.forEach(function(item) {
+                    var {
+                        id,
+                        username,
+                        userpwd,
+                        usertel
+                    } = item;
+
+                    html += `<tr id="tr">
+                                <td>${id}</td>
+                                <td>${username}</td>
+                                <td>${userpwd}</td>
+                                <td>${usertel}</td>
+                                <td onclick="window.delUl('${id}',this)" id="del">
+                                    <button type="button" class="btn btn-danger delbtn">删除</button>
+                                </li>
+                            </tr>`;
+                });
+                tbody.innerHTML = html;
+
+
+                // 正常的显示数据信息:
+                // var req = new XMLHttpRequest();
+                // req.open("get", `count.php?key=${key}`, true);
+                // req.send();
+                // req.onreadystatechange = function() {
+                //     if (xhr.readyState == 4 && xhr.status == 200) {
+                //         let result = xhr.responseText;
+                //         let obj = JSON.parse(result);
+                //         let count = obj["count"];
+                //         // console.log(count);
+                //         // 最大显示的数据条数:   页码从0开始
+                //         let maxPage = Math.ceil(count / selected) - 1;
+                //         // console.log(count);
+                //         // console.log(maxPage);
+                //         prev.disabled = false;
+                //         prev.onclick = function() {
+                //             prev.disabled = true;
+                //             page--;
+                //             getData(key, order, ways, selected * page, selected);
+                //         }
+
+                //         next.disabled = false;
+                //         next.onclick = function() {
+                //             next.disabled = true;
+                //             page++;
+                //             getData(key, order, ways, selected * page, selected)
+                //         }
+
+                //         // 开始都将其绑定  不满足条件就将其移除
+                //         if (page == 0) {
+                //             prev.onclick = null;
+                //             prev.disabled = true;
+                //         }
+                //         if (page == maxPage) {
+                //             next.onclick = null;
+                //             next.disabled = true;
+                //             // console.log(next.disabled);
+                //         }
+                //     }
+                // }
+            }
+        }
+    }
+
+    searchBtn.onclick = function() {
+        var keywords = keywordsInput.value;
+        key = keywords;
+        getData(key, username, id, select);
+    }
+</script>
+
+</html>

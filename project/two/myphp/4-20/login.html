@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+    <style>
+        .box {
+            margin: 50px auto;
+            width: 400px;
+            height: 180px;
+            background-color: #cdcdcd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        #form-group {
+            margin-top: 10px;
+        }
+        
+        .button {
+            width: 82px;
+            height: 34px;
+            margin-left: 115px;
+        }
+        
+        button {
+            display: block;
+            margin: 10px auto;
+        }
+        
+        label {
+            margin-left: 50px;
+            display: inline-block;
+            width: 60px;
+        }
+        
+        span {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form class="form-inline">
+            <div class="form-group" id="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="form-group" id="form-group">
+                <label for="userpwd">密码:</label>
+                <input type="password" class="form-control" id="userpwd" placeholder="请输入密码">
+            </div>
+            <br>
+            <div class="button">
+                <button id="btn" class="btn btn-default">点击登录</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="../cookie.js"></script>
+<script src="../ajax.js"></script>
+<script>
+    var usernameInput = document.getElementById("username");
+    var userpwdInput = document.getElementById("userpwd");
+    var btn = document.getElementById("btn");
+
+    btn.onclick = function() {
+        var username = usernameInput.value;
+        var userpwd = userpwdInput.value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", `login.php?username=${username}&userpwd=${userpwd}`, true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let result = xhr.responseText;
+                let obj = JSON.parse(result);
+                if (obj["code"] == 1) {
+                    // setCookie("loginName", username, 7);
+                    // setCookie("loginId", obj["id"], 7);
+                    localStorage.setItem("loginId", obj["userid"]);
+                    localStorage.setItem("loginName", username);
+
+                    // if (getCookie("backUrl")) { //跳转设置
+                    //     window.location.href = getCookie("backUrl");
+                    // } else {
+                    //     window.location.href = "goodsinfo.html";
+                    // }
+                    var backUrl = window.localStorage.getItem("backUrl");
+                    if (backUrl) {
+                        alert(obj["msg"]);
+                        window.location.href = backUrl;
+                    } else {
+                        window.location.href = "userlist.html";
+                    }
+                } else {
+                    alert(obj["msg"]);
+                }
+
+            }
+        }
+    }
+</script>
+
+</html>

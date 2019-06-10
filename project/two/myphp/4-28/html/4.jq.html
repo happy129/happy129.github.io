@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq的运用---绑定未来事件(事件委托)</title>
+</head>
+
+<body>
+    <button class="btn">确定</button>
+</body>
+<script src="../jquery-1.11.3.js"></script>
+<script>
+    $(document).on("click", ".btn", function() {
+        var btn = $("<button class='btn'>再见</button>");
+        $("body").append(btn);
+    })
+
+    // document.onclick = function (e) {
+    //     if (e.target.className == "btn") {
+    //         var btn = document.createElement("button");
+    //         btn.className = "btn";
+    //         btn.innerHTML = "6666";
+    //         document.body.appendChild(btn);
+    //     }
+
+    // }
+</script>
+
+</html>

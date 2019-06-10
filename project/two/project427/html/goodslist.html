@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品列表</title>
+    <link rel="shortcut icon" href="../img/small-logo.jpg" type="image/x-icon" width="10px">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1165447_cp67k9tx854.css">
+    <link rel="stylesheet" href="../css/goodslist.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/right.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <!-- <link rel="stylesheet" href="../Bootstrap/css/bootstrap.css"> -->
+    <style>
+        .u-flyer {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            position: fixed;
+            z-index: 9999;
+        }
+        
+        #msg {
+            position: fixed;
+            top: 300px;
+            right: 35px;
+            z-index: 10000;
+            width: 1px;
+            height: 52px;
+            line-height: 52px;
+            font-size: 20px;
+            text-align: center;
+            color: #fff;
+            background: #360;
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header"></header>
+    <right id="rightBox"></right>
+    <div class="center">
+        <div class="centerLine"></div>
+        <div class="listBox">
+            <div class="listBox-main">
+                <div class="listBox-sort">
+                    <div class="fl sort">排序：</div>
+                    <div class="sort-box fl">
+                        <button type="button" class="btn btn-success price">价格</button>
+                        <button type="button" class="btn btn-info discount">折扣</button>
+                        <!-- <button type="button" class="btn btn-primary dushu">度数</button>
+                        <button type="button" class="btn btn-primary year">年份</button> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="goods-list">
+            <ul class="proList">
+                <!-- <li class="listItem">
+                    <a href="" class="goodsLink"></a>
+                    <div class="itemBox">
+                        <a href="">
+                            <div class="itemImg">
+                                <img src="../img/zyjbn1.jpg" alt="">
+                            </div>
+                            <div class="itemName">
+                                <span class="location">中国</span>
+                                <span class="name">张裕解百纳</span>
+                                <span class="kind">红葡萄酒</span>
+                                <span class="weight">750ml</span>
+                            </div>
+                            <div class="itemPrices">
+                                <span class="price">￥168</span>
+                                <button class="addCartBtn btn">加入购物车</button>
+                            </div>
+                        </a>
+                    </div>
+                </li> -->
+
+            </ul>
+            <div id="msg">已成功加入购物车！</div>
+            <!-- <div class="goods-bottom">
+                <button class="btn prev">上一页</button>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <button class="btn next">下一页</button>
+            </div> -->
+            <div id="page">
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="footBox"></footer>
+</body>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/jquery.fly.min.js"></script>
+<script src="../js/page.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../js/goodslist.js"></script>
+
+</html>

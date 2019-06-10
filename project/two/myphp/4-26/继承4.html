@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>继承4---call/apply</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var person = {
+        username: '人类',
+    }
+    var yellowPerson = {
+        username: "黄种人",
+    }
+
+    function say(hobby1, hobby2) {
+        alert(this.username + "喜欢" + hobby1 + "爱好" + hobby2);
+    }
+    say.call(person, "足球", "唱歌");
+    say.apply(person, ["足球", "唱歌"]);
+</script>
+
+</html>

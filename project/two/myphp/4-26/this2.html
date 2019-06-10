@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this的指向 ---对象</title>
+</head>
+
+<body>
+    <div id="div"></div>
+</body>
+<script>
+    function func() {
+        console.log(this);
+    }
+
+    //② 通过对象.函数名()调用的：this指向这个对象
+    // 狭义对象
+    var obj = {
+        name: "obj",
+        func1: func
+    };
+    obj.func1(); // this--->obj
+
+    // 广义对象
+    document.getElementById("div").onclick = function() {
+        this.style.backgroundColor = "red";
+    }; // this--->div
+</script>
+
+</html>

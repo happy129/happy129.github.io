@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #f40;
+}
+
+$width:1200px;
+$margin: 0 auto;
+$fr:right;
+$fl:left;
+.top {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #cdcdcd;
+    .topContent {
+        width: 1000px;
+        margin: 5px auto;
+        padding-bottom: 5px;
+        .top-left {
+            width: 300px;
+            height: 40px;
+            float: $fl;
+            p {
+                line-height: 40px;
+                height: 40px;
+                padding: 0 20px;
+                float: $fl;
+                span {
+                    cursor: pointer;
+                }
+            }
+            p:nth-child(1) {
+                border-right: 1px solid #ccc;
+            }
+        }
+        .top-right {
+            float: $fr;
+            li {
+                float: $fl;
+                margin: 0 15px;
+            }
+            .mycart {
+                .cartNum {
+                    font-size: 20px;
+                    color: red;
+                }
+            }
+        }
+    }
+}
+
+.box {
+    margin: 50px auto;
+    width: 1200px;
+    /* background-color: rgb(238, 217, 210); */
+    .head {
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        text-align: center;
+        background-color: #0d3;
+        .name {
+            font-weight: bold;
+            color: #f40;
+            font-size: 22px;
+        }
+    }
+    .table {
+        margin-bottom: 0;
+        thead {
+            tr {
+                background-color: #cdcdcd;
+                text-align: center;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    text-align: center;
+                    padding: 4px;
+                }
+                #pic {
+                    padding: 4px;
+                    width: 600px;
+                    img {
+                        width: 45px;
+                        height: 45px;
+                        float: left;
+                        margin: 0 5px;
+                        /* display: inline-block;
+                            text-align: left; */
+                    }
+                    p {
+                        float: left;
+                        height: 44px;
+                        line-height: 40px;
+                        margin: 0 5px;
+                    }
+                }
+                .shuliang {
+                    width: 180px;
+                    text-align: center;
+                    input {
+                        display: block;
+                        width: 50px!important;
+                        float: left;
+                        margin-top: 8px;
+                        text-align: center;
+                    }
+                    .reduce {
+                        margin-left: 30px;
+                        border-left: 1px solid rgb(238, 238, 238);
+                        border-top: 1px solid rgb(238, 238, 238);
+                        border-bottom: 1px solid rgb(238, 238, 238);
+                    }
+                    .disable {
+                        pointer-events: none;
+                    }
+                    .add {
+                        border-right: 1px solid rgb(238, 238, 238);
+                        border-top: 1px solid rgb(238, 238, 238);
+                        border-bottom: 1px solid rgb(238, 238, 238);
+                    }
+                    span {
+                        display: block;
+                        width: 24px;
+                        height: 24px;
+                        float: left;
+                        text-align: center;
+                        margin-top: 8px;
+                        // background-color: #ccc;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.t-foot {
+    background-color: #cecece;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 10px;
+    #qx {
+        float: left;
+        margin: 0;
+    }
+    label {
+        input {
+            margin-top: 23px;
+            margin-right: 10px;
+        }
+    }
+    #delAll {
+        margin-left: 30px;
+    }
+    .sum {
+        float: right;
+        p {
+            margin: 0 20px;
+            float: left;
+            font-size: 18px;
+            #zong {
+                color: #f40;
+                font-weight: bold;
+            }
+            #pricesTotal {
+                color: #f40;
+                font-weight: bold;
+                font-style: italic;
+            }
+        }
+    }
+}

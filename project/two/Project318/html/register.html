@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="stylesheet" href="../css/register.css">
+
+</head>
+
+<body>
+    <div class="head-regist">
+        <div class="zuipin-wrapper clearfix">
+            <div class="zuipin-logo">
+                <a href="./index.html"><img src="https://www.zuipin.cn/web/images/login/logo.png" alt=""></a>
+            </div>
+            <p class="has-account">已有账号？ <a href="./login.html">请登录<i class="iconfont icon-xiangyou"></i></a></p>
+        </div>
+    </div>
+    <div class="reg-content regist-page">
+        <div class="regist-main">
+            <!-- 注册内容 -->
+            <div class="regist-content">
+                <div class="title">注册账户</div>
+                <form action="/regist/commit" onsubmit="return false;" method="post">
+                    <input type="text" class="username" placeholder="用户名:">
+                    <span class="username-span">含字母、数字、$、_,不能以数字开头,6-10位</span>
+                    <input type="text" class="userpwd" placeholder="密码:">
+                    <span class="userpwd-span">密码有字母、数字、$、_构成 ,6-12位</span>
+                    <input type="text" class="repwd" placeholder="再次输入密码:">
+                    <span class="repwd-span">确认密码</span>
+                    <input type="text" class="usercode" placeholder="验证码:">
+                    <div class="code"></div>
+                    <span class="usercode-span">请输入右侧的验证码</span>
+                    <input type="text" class="useremail" placeholder="请输入邮箱账号:">
+                    <span class="useremail-span">请输入常用的邮箱账号</span>
+                    <button class="btn">立即注册</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="copy_right">
+            <address>
+                Copyright 2010 - 2019 醉品茶城 厦门醉品春秋网络科技有限公司
+                </address>
+        </div>
+    </div>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/cookie.js"></script>
+    <script src="../js/string.js"></script>
+    <script src="../js/register.js"></script>
+</body>
+
+</html>

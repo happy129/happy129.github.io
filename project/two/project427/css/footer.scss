@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #CCC
+}
+
+$width:1200px;
+$margin: 0 auto;
+$fr:right;
+$fl:left;
+// 底部
+.v6_footer {
+    font-size: 13px;
+    font-family: "微软雅黑";
+    .footerMid {
+        height: 343px;
+        background: url(../img/footer_Bg.gif);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .7);
+        .footerMid_t {
+            padding-top: 7px;
+            width: 1150px;
+            height: 113px;
+            border-bottom: 2px solid #787878;
+            .footer_tel {
+                float: $fl;
+                margin-top: 20px;
+                width: 301px;
+                height: 75px;
+                background: url(../img/tel.png) left top no-repeat;
+            }
+            .footer_serv {
+                margin: 61px 0 0 30px;
+                display: inline-block;
+                color: #080808;
+                float: $fl;
+            }
+            .qrCodeBox {
+                float: $fr;
+                p {
+                    margin-right: 20px;
+                    margin-top: 15px;
+                    color: #fff;
+                }
+                .fl {
+                    float: $fl;
+                }
+                .footer_qrCode {
+                    width: 104px;
+                    height: 104px;
+                    float: $fl;
+                }
+            }
+        }
+        .footer_center {
+            margin: $margin;
+            width: 1150px;
+        }
+        .footer_link {
+            margin-top: 40px;
+            .firstDl {
+                margin-left: 100px;
+            }
+            dl {
+                float: $fl;
+                width: 170px;
+                width: 158px;
+                dt {
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    color: #fff;
+                    font-weight: 700;
+                }
+                dd {
+                    display: block;
+                    margin-inline-start: 0px;
+                    // width: 158px;
+                    // height: 24px;
+                    // line-height: 24px;
+                    a {
+                        display: inline-block;
+                        // font-size: 16px;
+                        // height: 24px;
+                        line-height: 24px;
+                        color: #a9a9a9;
+                    }
+                }
+            }
+        }
+    }
+    .mid_box {
+        margin: $margin;
+        width: $width;
+        p {
+            text-align: center;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .authentication {
+            margin-top: 10px;
+        }
+    }
+    .copyright {
+        padding-top: 83px;
+        background: url(../img/baozheng_06.jpg) center top no-repeat;
+        line-height: 24px;
+    }
+}

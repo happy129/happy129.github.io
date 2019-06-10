@@ -1,0 +1,230 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #CCC;
+}
+
+.head .topNav {
+  width: 100%;
+  height: 30px;
+  background-color: #3E3A39;
+  line-height: 30px;
+  font-size: 14px;
+  color: #CCC;
+  font-family: "宋体";
+}
+
+.head .topNav .topNavBox {
+  width: 1200px;
+  height: 30px;
+  margin: 0 auto;
+}
+
+.head .topNav .topNavBox .top-f {
+  float: left;
+}
+
+.head .topNav .topNavBox .top-r {
+  float: right;
+}
+
+.head .topNav .topNavBox .top-r li {
+  float: left;
+}
+
+.head .topNav .topNavBox .top-r li a {
+  padding: 0 20px;
+  color: #CCC;
+  cursor: pointer;
+}
+
+.head .topNav .topNavBox .top-r li span {
+  cursor: pointer;
+  color: white;
+}
+
+.head .topAd {
+  width: 1200px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.head .topAd img {
+  width: 1200px;
+  height: 80px;
+}
+
+.head .topItem {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0;
+  height: 90px;
+  font-size: 0px;
+}
+
+.head .topItem .topLogo img {
+  margin-top: 26px;
+  margin-right: 25px;
+  vertical-align: top;
+}
+
+.head .topItem .topActive {
+  margin: 20px 0 0 20px;
+}
+
+.head .topItem .topActive img {
+  width: 175px;
+  height: 60px;
+}
+
+.head .topItem .topSearch {
+  width: 450px;
+  margin: 24px 0 0 80px;
+  height: auto;
+}
+
+.head .topItem .topSearch .searchBox .search {
+  float: left;
+  width: 350px;
+  height: 33px;
+  line-height: 33px;
+  text-indent: 10px;
+  border: 3px solid #c40000;
+  font-size: 14px;
+  outline: 0;
+}
+
+.head .topItem .topSearch .searchBox .proposal-box {
+  margin-top: 39px;
+  width: 352px;
+  position: absolute;
+  height: auto;
+  border-left: 1px solid rgba(0, 0, 0, 0.11);
+  border-right: 1px solid rgba(0, 0, 0, 0.11);
+  left: 0;
+}
+
+.head .topItem .topSearch .searchBox .topSearchBtn {
+  float: left;
+  width: 86px;
+  height: 39px;
+  background: #c40000;
+  color: #fff;
+  line-height: 39px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Microsoft Yahei";
+  text-align: center;
+}
+
+.head .topItem .topSearch .searchBox .topTags a {
+  float: left;
+  margin-top: 7px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-right: 1px solid #ccc;
+  color: #E17F7F;
+  z-index: 8;
+}
+
+.head .topItem .topShopcar {
+  margin-left: 80px;
+  margin-top: 25px;
+}
+
+.head .topItem .topShopcar .shopCarBox {
+  position: relative;
+  width: 139px;
+  height: 34px;
+  font-size: 16px;
+  background: #f9f9f9;
+  border: 1px solid #f40;
+  line-height: 34px;
+  text-align: center;
+}
+
+.head .topItem .topShopcar .shopCarBox .cart {
+  color: #c40000;
+}
+
+.head .topItem .topShopcar .shopCarBox .cart i {
+  margin-left: 15px;
+  font-size: 25px;
+}
+
+.head .topItem .topShopcar .shopCarBox .cart .itemNum {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px 25px 25px 25px;
+  background-color: #f40;
+  color: #FFF;
+  top: -15px;
+  left: 35px;
+  line-height: 25px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.head .topItem .fl {
+  float: left;
+}
+
+.itemNav {
+  width: 1200px;
+  height: 45px;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+.itemNav .itemList {
+  height: 45px;
+  float: left;
+}
+
+.itemNav .itemList #listnav {
+  font-size: 18px;
+  padding: 0;
+  width: 185px;
+  background: #CC0210;
+  position: relative;
+  z-index: 999;
+  text-align: center;
+}
+
+.itemNav .itemList #listnav a {
+  width: 126px;
+  text-align: left;
+  display: inline-block;
+  height: 48px;
+  text-indent: .6em;
+  font-size: 16px;
+  position: relative;
+}
+
+.itemNav .itemList li {
+  float: left;
+  padding: 0 20px;
+  height: 45px;
+  line-height: 45px;
+}
+
+.itemNav .itemList li a {
+  color: #333;
+}
+
+.itemNav .itemList .fr {
+  float: right;
+}
+
+.itemNav a,
+.itemNav .qbfl-list a {
+  color: #FFF;
+}

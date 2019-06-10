@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this的指向 ---window</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function func() {
+        console.log(this);
+    }
+    //① 通过函数名()直接调用：this指向window
+    func(); // this--->window
+</script>
+
+</html>
