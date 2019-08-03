@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+      <%- process.env.VUE_APP_TYPE == 'sys_bus' ? 
+        '商户': process.env.VUE_APP_TYPE == 'sys_admin' ? 
+        '总': process.env.VUE_APP_TYPE == 'sys_operation' ?
+        '运维':  process.env.VUE_APP_TYPE == 'sys_ffc' ? 
+        '分分彩': process.env.VUE_APP_TYPE == 'sys_share_agent' ?
+        '分享代理': process.env.VUE_APP_TYPE == 'sys_operation_maintenance' ?
+        '运维系统':'无限代理'%>后台管理系统</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="/tools/crypto-js.min.js"></script>
+    <script type="text/javascript" src="/tools/jsencrypt.min.js"></script>
+    <script type="text/javascript" src="/tools/md5.min.js"></script>
+    <% if ( "development" === NODE_ENV) { %>
+      <script type="text/javascript" src="./config.js"></script>
+    <% } %>
+    <div id="app"></div>
+  </body>
+</html>

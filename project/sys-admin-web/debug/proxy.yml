@@ -1,0 +1,22 @@
+# 开发环境 后台网关30
+#/config-admin-api: http://192.168.2.209:7002/
+#/lottery-admin-api: http://192.168.2.209:8002/
+#/*-api: http://192.168.2.209:7002/
+
+
+# 测试环境
+/*-api: http://192.168.2.33
+#/*-api: http://192.168.3.41:8001
+#/*-api: http://elb-merchant-502225109.ap-southeast-1.elb.amazonaws.com
+
+
+# lobby环境
+# /*-api: http://192.168.2.207:8003
+
+
+# loki环境
+#/*-api: http://192.168.2.211
+
+
+# bob环境
+# /*-api: http://192.168.2.33

@@ -1,0 +1,59 @@
+
+.side-layout {
+    background-color: #20222a; 
+    height: 100%; 
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+        width: 0 !important
+    }
+
+    -ms-overflow-style: none;
+    
+}
+
+.logo {
+    height: 64px;
+    position: relative;
+    line-height: 64px;
+    padding-left: 24px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    background: #20222a;
+    overflow: hidden;
+
+    a {
+        display: flex;
+        height: 64px;
+        align-items: center;
+        overflow: hidden;
+        img {
+            height: 32px;
+            margin-right: 16px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 20px;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            transition: all 0.5s;
+            white-space: nowrap;
+        }
+    }
+    
+}
+
+.side-close {
+    .logo {
+        .router-link-active {
+            text-decoration: none;
+            h1 {
+              display: none;
+            }
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+}
