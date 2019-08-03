@@ -1,0 +1,435 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, target-densitydpi=high-dpi, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1,user-scalable=no,minimal-ui" />
+<title>澳洲六合号码来源</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/template.js"></script>
+<script type="text/html" id="number">
+    {{each list as val}}
+    <ul>
+        {{each val as value}}
+        <li>{{value}}</li>
+        {{/each}}
+    </ul>
+    {{/each}}
+</script>
+<script type="text/html" id="rule_number">
+    <table class="rule_number">
+    {{each list as val i}}
+<!--     <td colspan="11" style="height: 0.5rem;"></td> -->
+    {{each val as vol j}}
+    <tr>
+        <!-- {{if j==0}}
+        <td>位置</td>
+        {{else if j==1}}
+        <td>相加</td>
+        {{else if j==2}}
+        <td>取余</td>
+        {{else if j==3}}
+        <td>取号</td>
+        {{/if}} -->
+        {{each vol as value k}}
+        {{if k==0}}
+        <td>{{value[0]}}<br>{{value[1]}}<br>{{value[2]}}</td>
+        {{else if k==1}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else if k==2}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else if k==3}}
+        <td class="{{value[0]}}">{{value[1]}}</td>
+        {{/if}}
+        <!-- {{if value[1]=='重复'||value[1]=='无效'}}
+        <td><span>{{value[1]}}</span></td>
+        {{else}}
+        <td class="{{value[0]}}">{{value[0]}}</td>
+        {{/if}} -->
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="rule_lhc">
+    <table class="rule_lhc">
+    {{each list as val i}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>号码</td>
+        {{else}}
+        <td>对应</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if !value[2]}}
+        <td class="{{value[1]}}">{{value[0]}}</td>   
+        {{else}}
+        <td class="{{value[1]}} bgc">{{value[0]}}<span class="sit">{{value[2]}}</span></td> 
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="alternate_number">
+    {{each list as val}}
+    <table class="alternate_number">
+        <tr>
+            <td colspan="4">{{val.title}}</td>
+        </tr>
+        <tr>
+            <td>{{val.jia}}</td>
+            <td>{{val.sum}}</td>
+            <td>{{val.jian}}</td>
+            <td class="{{val.result[0]}}">{{val.result[1]}}</td>
+        </tr>
+    </table>
+    {{/each}}
+</script>
+<script language="javascript" type="text/javascript">
+    // 对接APP
+    function openInfo(){
+        // 获取开奖号码和对应期号
+        var openInfo = $('input[name="openInfo"]').val(),
+        //var openInfo = "59,19,20,59,19,20,57,20,44,32,11,52,27,36,80,79,78,26,38,29|756094"
+            openInfo = openInfo.split('|'),
+            issue = openInfo[1], // 期号
+            number = openInfo[0].split(','),
+            length = 7; // 开奖号码
+        // 显示期号
+        $('.kj_number h1 span').html(issue);
+        $('.kj_number_open h1 span').html(issue);
+        // 处理号码
+//console.log(number);
+        // 号码拆分成等长二维
+        var numberArr = new Array();
+        numberArr.push(number.slice(0,10));
+        numberArr.push(number.slice(10));
+        // 显示开奖号码
+        var numberHtml = template('number', {list: numberArr});
+        $('.kj_number .box').html(numberHtml);
+        // 开奖号码对应号码
+        var ruleNumber = [];
+        var length = 7;
+        var openNumber = []; // 最终号码
+        var sit_1 = [[],[],[],[],[]];
+        sit_1[0].push(['第1位','第2位','第3位'],['第4位','第5位','第6位'],['第7位','第8位','第9位'],['第10位','第11位','第12位']);
+        sit_1[1].push(['第13位','第14位','第15位'],['第16位','第17位','第18位'],['第19位','第20位','第1位'],['第2位','第3位','第4位']);
+        sit_1[2].push(['第5位','第6位','第7位'],['第8位','第9位','第10位'],['第11位','第12位','第13位'],['第14位','第15位','第16位']);
+        sit_1[3].push(['第17位','第18位','第19位'],['第20位','第1位','第2位'],['第3位','第4位','第5位'],['第6位','第7位','第8位']);
+        sit_1[4].push(['第9位','第10位','第11位'],['第12位','第13位','第14位'],['第15位','第16位','第17位'],['第18位','第19位','第20位']);
+        //console.log(sit_1)
+        var sit_2 = [[],[],[],[],[]];
+        sit_2[0].push(['0','1','2'],['3','4','5'],['6','7','8'],['9','10','11']);
+        sit_2[1].push(['12','13','14'],['15','16','17'],['18','19','0'],['1','2','3']);
+        sit_2[2].push(['4','5','6'],['7','8','9'],['10','11','12'],['13','14','15']);
+        sit_2[3].push(['16','17','18'],['19','0','1'],['2','3','4'],['5','6','7']);
+        sit_2[4].push(['8','9','10'],['11','12','13'],['14','15','16'],['17','18','19']);
+//         for(var i=0;i<numberArr.length;i++){
+//             ruleNumber[i] = [];
+//             ruleNumber[i][0] = [];
+//             ruleNumber[i][1] = [];
+//             for(var j=0;j<numberArr[i].length;j++){
+//                 var num = numberArr[i][j];
+//                 var color = '';
+//                 ruleNumber[i][0].push(['',num]);
+// //console.log(openNumber.length);return false;
+//                 var openLength = openNumber.length;
+//                 if(num>=50 ){
+//                     num = '无效';
+//                 }else if(openLength>=6) {
+//                     if (openLength==6) {
+//                         openNumber.push(num)
+//                         sit_t[0] = i;
+//                         sit_t[1] = j;
+//                     }else{
+//                         ruleNumber[sit_t[0]][1][sit_t[1]] = ['','无效'];
+//                         sit_t[0] = i;
+//                         sit_t[1] = j;
+//                         openNumber[6] = num;
+//                     }
+//                 }else{
+//                    openNumber.push(num);
+//                 }
+//                 color = getNumberColor(parseInt(num));
+//                 ruleNumber[i][1].push([color,num]);
+//             }
+//         }
+        // var ruleHtml = template('rule_number', {list: ruleNumber});
+        // $('.rule_table').html(ruleHtml);
+        var result2 = [];
+        for(var j=0;j<5;j++){
+                ruleNumber[j] = [];
+            for(var i=0;i<4;i++){
+                ruleNumber[j][i] = [];
+                ruleNumber[j][i][0] = [];
+                ruleNumber[j][i][1] = [];
+                ruleNumber[j][i][2] = [];
+                ruleNumber[j][i][3] = [];
+                sum = 0;
+                var deng = '';
+                var jia = '';
+                var jdeng = '';
+                var jian = '';
+                var color = '';
+                var txt1 = [];
+                var txt2 = [];
+                var result = [];
+                var exit = 0;
+                for(var k=0;k<3;k++){
+                    sum += parseInt(number[sit_2[j][i][k]])
+                    if (k==0) {
+                        jia = number[sit_2[j][i][k]]
+                    }else{
+                        jia = jia+'+'+number[sit_2[j][i][k]]
+                    }
+                    deng = '='+sum;
+                }
+                txt1.push(jia)
+                txt1.push(deng)
+                var mod = Math.floor(sum/49);
+                var rem = sum%49;
+                if(rem==0){
+                    rem=49;
+                    mod = mod-1;
+                }
+                jian = sum;
+                for(var l=0;l<mod;l++){
+                    jian = jian+'-49';
+                }
+                jdeng = '='+rem;
+                txt2.push(jian)
+                txt2.push(jdeng)
+                exit = result2.indexOf(rem);
+                
+                if (openNumber.length>=length) {
+                    rem = '无效'
+                    result.push('',rem)
+                }else if (exit==-1) {
+                    color = getNumberColor(parseInt(rem));
+                    openNumber.push([color,rem]);
+                    result.push(color,rem)
+                    result2.push(rem)
+                    console.log(result2)
+                }else{
+                    rem = '重复';
+                    result.push('',rem);
+                }
+                ruleNumber[j][i][0].push(sit_1[j][i][0],sit_1[j][i][1],sit_1[j][i][2]);
+                ruleNumber[j][i][1].push(txt1[0],txt1[1]);
+                ruleNumber[j][i][2].push(txt2[0],txt2[1]);
+                ruleNumber[j][i][3].push(result[0],result[1]);
+
+            }
+        }
+        var ruleHtml = template('rule_number', {list: ruleNumber});
+        $('.rule_table').html(ruleHtml);
+        // /*备用*/
+        // var alternate = []; //开奖号码转二维array(4(5))
+        // var alternateNumber = [];
+        // while(number.length) alternate.push(number.splice(0,5));
+        // for(var i=0;i<alternate.length;i++){
+        //     var tit='', jia = '', sum = 0, mod ='', jian = '', result = 0;
+        //         sit = parseInt(i + 1);
+        //     var color = '';
+        //     tit = '备用' + sit + '（取' + (1+(sit-1)*5) + '-' + sit*5 + '位数）';
+        //     for(var j=0;j<alternate[i].length;j++){
+        //         jia += alternate[i][j] + '+';
+        //         sum += parseInt(alternate[i][j]);
+        //     }
+        //     mod = parseInt(sum / 50);
+        //     jian = sum;
+        //     if(mod>0){
+        //         for(var j=0;j<mod;j++){
+        //             jian += '-' + 50;
+        //         }
+        //         result = sum - mod*50;
+        //         jian += '=' + result;
+        //     }else{
+        //         result = num;
+        //     }
+        //     jia = jia.substr(0,jia.length-1);
+        //     if(openNumber.length>=length){
+        //         result = ['','无效'];
+        //     }else if(openNumber.indexOf(result)==1){
+        //         result = ['','重复跳过'];
+        //     }else{
+        //         openNumber.push(result);
+        //         result = [getNumberColor(result),result];
+        //     }
+        //     alternateNumber.push({
+        //         title: tit,
+        //         jia: jia,
+        //         sum: sum,
+        //         jian: jian,
+        //         result: result
+        //     });
+        // }
+        // var alternateHtml = template('alternate_number', {list: alternateNumber});
+        // $('#alternate').html(alternateHtml);
+        
+        //最终号码
+        if(openNumber.length<length){
+            $('.foot_elven .lhc_foot ul').append('<li class="false">本期无效，做撤单处理</li>');
+        }else{
+            for(var i=0;i<openNumber.length;i++){
+                var number = parseInt(openNumber[i][1]),
+                color = getNumberColor(number);
+                if(number<10) number = '0' + number;
+                $('.foot_elven .lhc_foot ul').append('<li class="'+color+'">'+number+'</li>');
+                $('.kj_number_open .box ul').append('<li class="'+color+'">'+number+'</li>')
+                if(i==5){
+                    $('.foot_elven .lhc_foot ul').append('<li class="plus"></li>');
+                    $('.kj_number_open .box ul').append('<li class="plus_blue"></li>')
+                }
+            }
+        }
+
+        //号码详情
+        // var happy8ball = [];
+        // var happy5 = [];
+        // var rulelhc = [];
+        // var sitnum = ['1','2','3','4','5','6','T'];
+        // happy8ball[0] = [['01'],['02'],['03'],['04'],['05'],['06'],['07'],['08'],['09'],['10']];
+        // happy8ball[1] = [['11'],['12'],['13'],['14'],['15'],['16'],['17'],['18'],['19'],['20']];
+        // happy8ball[2] = [['21'],['22'],['23'],['24'],['25'],['26'],['27'],['28'],['29'],['30']];
+        // happy8ball[3] = [['31'],['32'],['33'],['34'],['35'],['36'],['37'],['38'],['39'],['40']];
+        // happy8ball[4] = [['41'],['42'],['43'],['44'],['45'],['46'],['47'],['48'],['49'],['50']];
+        // happy8ball[5] = [['51'],['52'],['53'],['54'],['55'],['56'],['57'],['58'],['59'],['60']];
+        // happy8ball[6] = [['61'],['62'],['63'],['64'],['65'],['66'],['67'],['68'],['69'],['70']];
+        // happy8ball[7] = [['71'],['72'],['73'],['74'],['75'],['76'],['77'],['78'],['79'],['80']];
+        // happy5[0] = [['01'],['02'],['03'],['04'],['05'],['06'],['07'],['08'],['09'],['10']];
+        // happy5[1] = [['11'],['12'],['13'],['14'],['15'],['16'],['17'],['18'],['19'],['20']];
+        // happy5[2] = [['21'],['22'],['23'],['24'],['25'],['26'],['27'],['28'],['29'],['30']];
+        // happy5[3] = [['31'],['32'],['33'],['34'],['35'],['36'],['37'],['38'],['39'],['40']];
+        // happy5[4] = [['41'],['42'],['43'],['44'],['45'],['46'],['47'],['48'],['49'],['-']];
+        // happy5[5] = [['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-']];
+        // happy5[6] = [['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-']];
+        // happy5[7] = [['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-'],['-']];
+        // for(var i=0;i<8;i++){
+        //     for(var j=0;j<10;j++){
+        //         var kj = 0;
+        //         var sit = 0;
+        //         for(var k=0;k<7;k++){
+        //             if (happy5[i][j][0]==openNumber[k]) {
+        //                 kj=1;
+        //                 sit=k;
+        //             }     
+        //         }
+        //         if (kj==1) {
+        //             var color = getNumberColor(parseInt(happy5[i][j][0]));
+        //             happy5[i][j].push(color);
+        //             happy5[i][j].push(sitnum[sit]);
+        //         }else{
+        //             var color = getNumberColor(parseInt(happy5[i][j][0]));
+        //             happy5[i][j].push(color);
+        //         }
+        //     }
+        //     rulelhc[i] = [];
+        //     rulelhc[i].push(happy8ball[i]);
+        //     rulelhc[i].push(happy5[i]);
+        // }
+        // console.log(rulelhc);
+        // var rulelhcHtml = template('rule_lhc', {list: rulelhc});
+        // $('.mappingtable').html(rulelhcHtml);
+    }
+    function getNumberColor(num){
+        var color = '';
+        switch (num) {
+            case 1:case 2:case 7:case 8:case 12:case 13:case 18:case 19:case 23:case 24:case 29:case 30:case 34:case 35:case 40:case 45:case 46:
+                color = 'red';
+                break;
+            case 3:case 4:case 9:case 10:case 14:case 15:case 20:case 25:case 26:case 31:case 36:case 37:case 41:case 42:case 47:case 48:
+                color = 'blue';
+                break;
+            case 5:case 6:case 11:case 16:case 17:case 21:case 22:case 27:case 28:case 32:case 33:case 38:case 39:case 43:case 44:case 49:
+                color = 'green';
+                break;
+            default:
+                break;
+        }
+        return color;
+    }
+</script>
+<style type="text/css">
+.rule_number td, .alternate_number td{
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 2.6rem;
+    background-position: center;
+}
+.rule_number td.red, .alternate_number td.red,.rule_lhc td.red,.kj_number_open li.red{
+    color:#000;
+    background-image: url(lhc_red.png);
+}
+.rule_number td.blue, .alternate_number td.blue,.rule_lhc td.blue,.kj_number_open li.blue{
+    color:#000;
+    background-image: url(lhc_blue.png);
+}
+.rule_number td.green, .alternate_number td.green,.rule_lhc td.green,.kj_number_open li.green{
+    color:#000;
+    background-image: url(lhc_green.png);
+}
+.lhc .rule_number td{ 
+    color: #83d5f0;
+    width: 25%;
+}
+.lhc .rule_number tr td:last-child{ color: black;}
+</style>
+</head>
+<body class="lhc">
+    <script language="javascript">
+        //调试
+        // $(function(){
+        //     openInfo();
+        // });
+    </script>
+    <input type="hidden" name="openInfo" value=""></input>
+    <!--<input type="hidden" name="openInfo" value="05,19,33,62,45,08,57,20,44,32,11,52,27,36,80,75,55,26,38,29|756094"></input>-->
+    <div class="kl11x5">
+        <section class="kj_number bdbt">
+            <h1><label class="lottery-name">澳洲ACT</label>第<span>-</span>期</h1>
+            <div class="box"></div>
+        </section>
+        <section class="kj_number_open bdbt">
+            <h1>澳洲六合第<span>-</span>期</h1>
+            <div class="box">
+                <ul>
+                </ul>
+            </div>
+        </section>
+        <section class="rule">
+            <div class="count">计算</div>
+            <div class="desc"><label class="lottery-name">澳洲ACT</label>号码中按顺序取三个数的和值，用该和值一直减去49，最后得到一个小于等于49的数字就是澳洲六合的开奖号码，取前七个有效数字为当期澳洲六合的开奖号码（若无法补齐七个开奖号码，则本局无效作撤单处理）</div>
+            <table class="rule_number rule_number2">
+                <tr>
+                    <td>位置</td>
+                    <td>和值</td>
+                    <td>计算</td>
+                    <td>号码</td>
+                </tr>
+            </table>
+        </section>
+        <section class="rule_table"></section>
+        <section class="foot_elven">
+            <div class="lhc_foot">
+                <ul>
+                    <li>开奖结果</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script language="javascript" type="text/javascript">
+    $(function(){
+        $('.rule_lhc tr td').each(function(){
+            if($(this).html()=='-'){
+                $(this).addClass('color2');
+            }
+        })  
+    })
+    </script>
+</body>
+</html>

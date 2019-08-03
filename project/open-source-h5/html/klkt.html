@@ -1,0 +1,497 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, target-densitydpi=high-dpi, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1,user-scalable=no,minimal-ui" />
+<title>快乐快艇号码来源</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/template.js"></script>
+<script type="text/html" id="number">
+    {{each list as val}}
+    <ul>
+        {{each val as vol}}
+        <li>{{vol}}</li>
+        {{/each}}
+    </ul>
+    {{/each}}
+</script>
+<script type="text/html" id="rule_number">
+    <table class="rule_number">
+    {{each list as val i}}
+    {{if i==1}}
+    <td colspan="11" style="height: 0.5rem"></td>
+    {{/if}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>快乐8</td>
+        {{else if j==1}}
+        <td>取尾数</td>
+        {{else if j==2}}
+        <td>取号</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if value=='重复'||value=='无效'||value=='移除'}}
+        <td><span>{{value}}</span></td>
+        {{else if j==2}}
+        <td class="sc_{{value}}"></td>
+        {{else}}
+        <td>{{value}}</td>
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="rule_number1">
+    <table class="backup">
+    {{each list as val i}}
+    {{if i==1}}
+    <td colspan="11" style="height: 0.5rem"></td>
+    {{/if}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>北京快乐8</td>
+        {{else if j==1}}
+        <td>相加</td>
+        {{else if j==2}}
+        <td>取尾数</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if value=='重复'||value=='无效'}}
+        <td><span>{{value}}</span></td>
+        {{else if j==2}}
+        <td class="sc_{{value}}"></td>
+        {{else if j==1}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else}}
+        <td>{{value}}</td>
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="rule_number2">
+    <table class="backup">
+    {{each list as val i}}
+    {{if i==1}}
+    <td colspan="11" style="height: 0.5rem"></td>
+    {{/if}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>位置</td>
+        {{else if j==1}}
+        <td>相加</td>
+        {{else if j==2}}
+        <td>取尾数</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if value=='重复'||value=='无效'}}
+        <td><span>{{value}}</span></td>
+        {{else if j==0||j==1}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else}}
+        <td class="sc_{{value}}"></td>
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="rule_number3">
+    <table class="backup">
+    {{each list as val i}}
+    {{if i==1}}
+    <td colspan="11" style="height: 0.5rem"></td>
+    {{/if}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>位置</td>
+        {{else if j==1}}
+        <td>相加</td>
+        {{else if j==2}}
+        <td>取尾数</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if value=='重复'||value=='无效'}}
+        <td><span>{{value}}</span></td>
+        {{else if j==0||j==1}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else}}
+        <td class="sc_{{value}}"></td>
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script type="text/html" id="rule_number4">
+    <table class="backup">
+    {{each list as val i}}
+    {{if i==1}}
+    <td colspan="11" style="height: 0.5rem"></td>
+    {{/if}}
+    {{each val as vol j}}
+    <tr>
+        {{if j==0}}
+        <td>位置</td>
+        {{else if j==1}}
+        <td>相加</td>
+        {{else if j==2}}
+        <td>取尾数</td>
+        {{/if}}
+        {{each vol as value}}
+        {{if value=='重复'||value=='无效'}}
+        <td><span>{{value}}</span></td>
+        {{else if j==1||j==0}}
+        <td>{{value[0]}}<br>{{value[1]}}</td>
+        {{else}}
+        <td class="sc_{{value}}"></td>
+        {{/if}}
+        {{/each}}
+    </tr>
+    {{/each}}
+    {{/each}}
+    </table>
+</script>
+<script language="javascript" type="text/javascript">
+    // 对接APP
+    function openInfo(){
+        // 获取开奖号码和对应期号
+        var openInfo = $('input[name="openInfo"]').val(),
+        //var openInfo = "77,64,34,04,44,64,04,64,74,34,44,17,80,36,60,30,79,43,59,20|756094",
+            openInfo = openInfo.split('|'),
+            issue = openInfo[1], // 期号
+            number = openInfo[0].split(','), // 开奖号码
+            length = 10;
+        // 显示期号
+        $('.kj_number h1 span').html(issue);
+        $('.kj_number_open h1 span').html(issue);
+    // 处理号码
+        // 号码拆分成等长二维
+        var numberArr = [];
+        numberArr.push(number.slice(0,10));
+        numberArr.push(number.slice(10));
+        // 显示开奖号码
+        var numberHtml = template('number', {list: numberArr});
+        $('.kj_number .box').html(numberHtml);
+        //开奖号码
+        var sc_kj = ['1','2','3','4','5','6','7','8','9','0'];
+        // 开奖号码对应号码
+        var ruleNumber = [];
+        var ruleNumber1 = [];
+        var ruleNumber2 = [];
+        var ruleNumber3 = [];
+        var ruleNumber4 = [];
+        var openNumber = []; // 最终号码
+        var openKlNumber = [];
+        for(var i=0;i<numberArr.length;i++){
+            ruleNumber[i] = [];
+            ruleNumber[i][0] = [];
+            ruleNumber[i][1] = [];
+            ruleNumber[i][2] = [];
+            for(var j=0;j<numberArr[i].length;j++){
+            	ruleNumber[i][0].push(numberArr[i][j]);
+                var num = parseInt(numberArr[i][j]) % 10;
+                var num_1 = parseInt(numberArr[i][j]);
+                    ruleNumber[i][1].push(num);
+                    var openLength = openNumber.length,
+                        exit = openNumber.indexOf(num);
+                    if(openLength>=length){
+                        num = '无效';
+                    }else if(exit==-1){
+                        openNumber.push(num);
+                    }else{
+                        num = '重复';
+                    }
+                ruleNumber[i][2].push(num);
+            }
+        }
+        var ruleHtml = template('rule_number', {list: ruleNumber});
+        $('.rule_table').html(ruleHtml);
+
+        // 备用一（个位／十位，相加的尾数）
+        for(var i=0;i<numberArr.length;i++){
+            ruleNumber1[i] = [];
+            ruleNumber1[i][0] = [];
+            ruleNumber1[i][1] = [];
+            ruleNumber1[i][2] = [];
+            for(var j=0;j<numberArr[i].length;j++){
+                ruleNumber1[i][0].push(numberArr[i][j]);
+                num1_add = numberArr[i][j].split('');
+                var num1_add_b1 = (parseInt(num1_add[0]) + parseInt(num1_add[1])) % 10;
+                exit = openNumber.indexOf(num1_add_b1);
+                if (openLength>=length) {
+                    num1_add_b1 = '无效';
+                }else if (exit==-1) {
+                    openNumber.push(num1_add_b1);
+                }else{
+                    num1_add_b1 = '重复';
+                }
+                var txt = [];
+                txt[0] = num1_add[0]+'+'+num1_add[1];
+                txt[1] = '='+(parseInt(num1_add[0])+parseInt(num1_add[1]));
+                ruleNumber1[i][1].push(txt);
+                ruleNumber1[i][2].push(num1_add_b1);
+            }
+        }
+        var ruleHtml_b1 = template('rule_number1', {list: ruleNumber1});
+        $('.backup_b1').html(ruleHtml_b1);
+
+        //备用二（第一位／第二十位，相加的尾数）
+        for(var i=0;i<numberArr.length;i++){
+            ruleNumber2[i] = [];
+            ruleNumber2[i][0] = [];
+            ruleNumber2[i][1] = [];
+            ruleNumber2[i][2] = [];
+            sit_1 = [['第1位','第20位'],['第2位','第19位'],['第3位','第18位'],['第4位','第17位'],['第5位','第16位'],['第6位','第15位'],['第7位','第14位'],['第8位','第13位'],['第9位','第12位'],['第10位','第11位']]
+            for(var j=0;j<5;j++){
+                var txt1 = [];
+                if (i==0) {
+                    txt1[0]=numberArr[0][j]+'+'+numberArr[1][9-j]
+                    txt1[1]='='+(parseInt(numberArr[0][j])+parseInt(numberArr[1][9-j]))
+                    var num1_add_b2 = (parseInt(numberArr[0][j])+parseInt(numberArr[1][9-j])) % 10;
+                    ruleNumber2[0][0].push(sit_1[j]);
+                }else{
+                    txt1[0]=numberArr[0][5+j]+'+'+numberArr[1][4-j]
+                    txt1[1]='='+(parseInt(numberArr[0][5+j])+parseInt(numberArr[1][4-j]));
+                    num1_add_b2 = (parseInt(numberArr[0][5+j])+parseInt(numberArr[1][4-j])) % 10;
+                    ruleNumber2[1][0].push(sit_1[j+5]);
+                }
+                exit = openNumber.indexOf(num1_add_b2);
+                if (openLength>=length) {
+                    num1_add_b2 = '无效'
+                }else if (exit==-1) {
+                    openNumber.push(num1_add_b2);
+                }else{
+                    num1_add_b2 = '重复';
+                }
+                ruleNumber2[i][1].push(txt1);
+                ruleNumber2[i][2].push(num1_add_b2);
+            }
+        }
+        var ruleHtml_b2 = template('rule_number2', {list: ruleNumber2});
+        $('.backup_b2').html(ruleHtml_b2);
+
+        //备用三（第一位／第二位，相加的尾数）
+        for(var i=0;i<numberArr.length;i++){
+            ruleNumber3[i] = [];
+            ruleNumber3[i][0] = [];
+            ruleNumber3[i][1] = [];
+            ruleNumber3[i][2] = [];
+            sit_2 = [['第1位','第2位'],['第3位','第4位'],['第5位','第6位'],['第7位','第8位'],['第9位','第10位'],['第11位','第12位'],['第13位','第14位'],['第15位','第16位'],['第17位','第18位'],['第19位','第20位']];
+            for(var k=0;k<5;k++){
+                    if (i==0) {
+                        ruleNumber3[i][0].push(sit_2[k]);
+                    }else{
+                        ruleNumber3[i][0].push(sit_2[k+5]);
+                    }
+                }
+            for(var j=0;j<10;j+=2){
+                var txt2 = [];
+                txt2[0]=numberArr[i][j]+'+'+numberArr[i][j+1];
+                txt2[1]='='+(parseInt(numberArr[i][j])+parseInt(numberArr[i][j+1]));
+                var num1_add_b3 = (parseInt(numberArr[i][j])+parseInt(numberArr[i][j+1])) % 10;
+                exit = openNumber.indexOf(num1_add_b3);
+                if (openLength>=length) {
+                    num1_add_b3 = '无效'
+                }else if (exit==-1) {
+                    openNumber.push(num1_add_b3);
+                }else{
+                    num1_add_b3 = '重复';
+                }
+                ruleNumber3[i][1].push(txt2);
+                ruleNumber3[i][2].push(num1_add_b3);
+            }
+        }
+        var ruleHtml_b3 = template('rule_number3', {list: ruleNumber3});
+        $('.backup_b3').html(ruleHtml_b3);
+
+        //备用四（第一位／第十一位，相加的尾数）
+        for(var i=0;i<numberArr.length;i++){
+            ruleNumber4[i] = [];
+            ruleNumber4[i][0] = [];
+            ruleNumber4[i][1] = [];
+            ruleNumber4[i][2] = [];
+            sit_3 = [['第1位','第11位'],['第2位','第12位'],['第3位','第13位'],['第4位','第14位'],['第5位','第15位'],['第6位','第16位'],['第7位','第17位'],['第8位','第18位'],['第9位','第19位'],['第10位','第20位']];
+            for(var j=0;j<5;j++){
+                var txt3 = [];
+                if (i==0) {
+                    txt3[0]=numberArr[0][j]+'+'+numberArr[1][j]
+                    txt3[1]='='+(parseInt(numberArr[0][j])+parseInt(numberArr[1][j]))
+                    var num1_add_b4 = (parseInt(numberArr[0][j])+parseInt(numberArr[1][j])) % 10;
+                    ruleNumber4[i][0].push(sit_3[j]);
+                }else{
+                    txt3[0]=numberArr[0][5+j]+'+'+numberArr[1][5+j]
+                    txt3[1]='='+(parseInt(numberArr[0][5+j])+parseInt(numberArr[1][5+j]))
+                    num1_add_b4 = (parseInt(numberArr[0][5+j])+parseInt(numberArr[1][5+j])) % 10;
+                    ruleNumber4[i][0].push(sit_3[j+5]);
+                }
+                exit = openNumber.indexOf(num1_add_b4);
+                if (openLength>=length) {
+                    num1_add_b4 = '无效'
+                }else if (exit==-1) {
+                    openNumber.push(num1_add_b4);
+                }else{
+                    num1_add_b4 = '重复';
+                }
+                ruleNumber4[i][1].push(txt3);
+                ruleNumber4[i][2].push(num1_add_b4);
+            }
+        }
+        var ruleHtml_b4 = template('rule_number4', {list: ruleNumber4});
+        $('.backup_b4').html(ruleHtml_b4);
+        var kj_string = 1;
+        if (openNumber.length==9) {
+            for(var i=0;i<sc_kj.length;i++){
+                sc_kj[i] = parseInt(sc_kj[i]);
+                exit =  openNumber.indexOf(sc_kj[i]);
+                if (exit == -1) {
+                    openNumber.push(sc_kj[i]);
+                    break;
+                }       
+            }
+        }
+
+        for(var i=0;i<openNumber.length;i++){
+            $('.foot_elven .box ul').append('<p class="sc_'+openNumber[i]+'"></p>');
+            $('.kj_number_open .box ul').append('<p class="sc_'+openNumber[i]+'"></p>');
+        } 
+        
+    }
+</script>
+<style type="text/css">
+    .foot_elven p,.kj_number_open p{
+        -moz-box-flex:1;
+        -webkit-box-flex:1;
+        box-flex:1;
+        text-align: center;
+        font-size: 1.4rem;
+        color: white;
+    }
+    .sc_1{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_1.png);
+    }
+    .sc_2{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_2.png);
+    }
+    .sc_3{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_3.png);
+    }
+    .sc_4{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_4.png);
+    }
+    .sc_5{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_5.png);
+    }
+    .sc_6{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_6.png);
+    }
+    .sc_7{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_7.png);
+    }
+    .sc_8{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_8.png);
+    }
+    .sc_9{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_9.png);
+    }
+    .sc_0{
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+        background-position: center;
+        background-image: url(sc_10.png);
+
+    }
+</style>
+</head>
+<body>
+    <script language="javascript">
+		// $(function(){
+		// 	openInfo();
+		// });
+    </script>
+    <input type="hidden" name="openInfo"></input>
+    <!--<input type="hidden" name="openInfo" value="05,19,33,62,45,08,57,20,44,32,11,52,27,36,80,75,55,26,38,29|756094"></input>-->
+	<div class="kl11x5">
+        <section class="kj_number bdbt">
+            <h1>北京快乐8第<span>-</span>期</h1>
+            <div class="box"></div>
+        </section>
+        <section class="kj_number_open bdbt">
+            <h1>快乐快艇第<span>-</span>期</h1>
+            <div class="box">
+                <ul></ul>
+            </div>
+        </section>
+        <section class="rule">
+            <div class="count">计算</div>
+            <div class="desc">取北京快乐8的开奖号码尾数作为快乐快艇的开奖号码,尾数0是开奖号码的10（重复则跳过，取前10位
+有效号码作为快乐快艇的开奖号码,若无法凑齐10位开奖号码,则取备用号码）</div>
+        </section>
+        <section class="rule_table"></section>
+        <section class="txt">
+            <li class="txt">备用号码1<br>计算方式:取北京快乐8开奖号码的个位和十位相加的和值，再取该和值的尾数作为快乐快艇的开奖号码</li>    
+        </section>
+        <section class="backup_b1"></section>
+        <section class="txt">
+            <li class="txt">备用号码2<br>计算方式:取北京快乐8开奖号码的第一位和二十位(第二位和第十九位...第十位和第十一位以此类推)相加的和值，再取该和值的尾数作为快乐快艇的开奖号码</li>    
+        </section>
+        <section class="backup_b2"></section>
+        <section class="txt">
+            <li class="txt">备用号码3<br>计算方式:取北京快乐8开奖号码的第一位和二位(第二位和第三位...第十九位和第二十位以此类推)相加的和值，再取该和值的尾数作为快乐快艇的开奖号码</li>    
+        </section>
+        <section class="backup_b3"></section>
+        <section class="txt">
+            <li class="txt">备用号码4<br>计算方式:取北京快乐8号码的第一位和十一位(第二位和第十二位...第十位和第二十位以此类推)相加的和值，再取该和值的尾数作为快乐快艇的开奖号码</li>    
+        </section>
+        <section class="backup_b4"></section>
+        <section class="txt">
+            <li class="txt">备注：<br>若最终只能取到9个开奖号码，最后一个自动补齐</li>    
+        </section>
+        <section class="foot_elven">
+            <div class="box">
+                <ul>
+                    <li style="color:#f4e60b;">开奖结果</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>游戏说明</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport">
+	<link rel="stylesheet" href="./html/css/index.css" />
+</head>
+
+<body>
+	<!-- 低频彩说明页 -->
+	<div class="low_descr">
+		<div class="title">
+			<div>
+				<span>号码来源</span>
+				<span class="s">(按开奖顺序排列)</span>
+			</div>
+			<a href="#" id="url" style="display: none;"></a>
+		</div>
+		<div class="scroll">
+			<iframe name="fm2" id="fm2" onload="onload"></iframe>
+		</div>
+	</div>
+	<script>
+		(function() {
+			var $this = {
+				watchSrc: function () {
+					var lottery = this.getLocationParam();
+					var iframe = document.getElementById("fm2");
+					if (1 == lottery.category || 19 == lottery.category) return (iframe.src = "/html/azssc.html");
+					// 11|5
+					if (2 == lottery.category) return (iframe.src = "/html/az11x5.html");
+					// K3
+					if (3 == lottery.category) return (iframe.src = "/html/azk3.html");
+					// PK10
+					if (4 == lottery.category || 15 == lottery.category) return (iframe.src = "/html/azF1.html");
+					// LHC
+					if (16 == lottery.category || 20 == lottery.category) return (iframe.src = "/html/az165.html");
+					return "";
+				},
+				onWatchLottery: function () {
+					// const { issueNo, openNumbers, lotteryName, parentLotteryName, sourceUrl } = this.getLocationParam();
+					// const { $: $$, openInfo } = window.frames.fm2;
+					var _this$getLocationPara = this.getLocationParam(),
+					issueNo = _this$getLocationPara.issueNo,
+					openNumbers = _this$getLocationPara.openNumbers,
+					lotteryName = _this$getLocationPara.lotteryName,
+					parentLotteryName = _this$getLocationPara.parentLotteryName,
+					sourceUrl = _this$getLocationPara.sourceUrl;
+
+					var _window$frames$fm = window.frames.fm2,
+					$$ = _window$frames$fm.$,
+					openInfo = _window$frames$fm.openInfo;
+					$$(".lottery-name").text(lotteryName);
+					$$(".kj_number_open h1").html(`${lotteryName}第<span>-</span>期`);
+					if (!issueNo) return;
+					$$("input[name=openInfo]").val(`${openNumbers}|${issueNo}`);
+					$$(".kj_number_open ul").empty();
+					$$("ul:last").html("<li>开奖结果</li>");
+					if (openInfo) openInfo();
+					$$(".lottery-name").text(parentLotteryName);
+					document.querySelector('.s').innerHTML = parentLotteryName + '(按开奖顺序排列)';
+					document.getElementById("url").innerHTML = parentLotteryName;
+
+					document.querySelector('#url').href = sourceUrl
+					var none = (sourceUrl && sourceUrl.indexOf("//") >= 0) ? "inline-block" : "none";
+					document.querySelector('#url').style.display = none;
+				},
+				getLocationParam: function () {
+					var search = location.search.split("?")[1];
+					if (!search) return {};
+					return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(
+						/=/g, '":"') + '"}');
+				},
+				init: function () {
+					var $this = this;
+					document.getElementById("fm2").onload = function () {
+						$this.onWatchLottery();
+					}
+					this.watchSrc();
+					return this;
+				}
+			};
+
+			return $this.init();
+		})();
+
+	</script>
+</body>
+
+</html>
